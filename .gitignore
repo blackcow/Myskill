@@ -1,0 +1,25 @@
+# Local scratch and reference material
+_tmp/
+_reference/
+
+# Python environments and caches
+**/.venv/
+**/venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# JavaScript dependencies and build outputs
+node_modules/
+dist/
+build/
+
+# Logs and local OS/editor noise
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

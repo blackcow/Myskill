@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "source_type": "paper_pdf",
+  "input": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf",
+  "source_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf",
+  "pdf_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/resolve/main/DeepSeek_V4.pdf",
+  "download": {
+    "method": "download",
+    "status_code": 200,
+    "content_type": "application/pdf",
+    "bytes": 4480407,
+    "final_url": "https://cas-bridge.xethub.hf.co/xet-bridge-us/69e864fd6b68f7e6cfc63ca3/60ba3f8de5d5172b5f3230b024eff941ac2ca747c301035124a2787e6169be2b",
+    "final_url_sanitized": true
+  },
+  "title": "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence",
+  "authors": [],
+  "arxiv_id": null,
+  "version": null,
+  "published": null,
+  "arxiv_summary": null,
+  "captured_at": "2026-05-13T16:41:33+08:00",
+  "parser": "docling",
+  "parser_version": "2.93.0",
+  "page_count": 58,
+  "content_chars": 174595,
+  "content_sha256": "603449486899511740ee61b699391ed2e6c3be9730c0556dad025acba9b2a4f8",
+  "source_pdf_sha256": "8a03dadae71894de1515da33e296f0df1dbeed3e7f4bf0badd087f9af77f29e9",
+  "asset_count": 15,
+  "picture_count": 15,
+  "markdown_image_refs": 15,
+  "image_asset_mode": "referenced_assets",
+  "image_scale": 4.0,
+  "image_effective_dpi": 288,
+  "image_generation": {
+    "source": "docling_picture_items_and_pdf_crop_fallbacks",
+    "generate_page_images": false,
+    "generate_picture_images": true,
+    "generate_table_images": false,
+    "generate_figure_fallback_images": true
+  },
+  "figure_fallback_count": 8,
+  "figure_fallbacks": [
+    {
+      "page_no": 1,
+      "caption": "Figure 1 | Left : benchmark performance of DeepSeek-V4-Pro-Max and its counterparts. Right : inference FLOPs and KV cache size of DeepSeek-V4 series and DeepSeek-V3.2.",
+      "asset": "assets/figure_fallback_page_0001_1_scale_4.png",
+      "crop_bbox": {
+        "l": 67.3976821899414,
+        "t": 374.3133768371875,
+        "r": 526.9321899414062,
+        "b": 124.02883469843755
+      },
+      "noise_text_count": 78,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000001_0261cfed3b2305cc33be2b7bd3838029264dd6c0a9ba994bfca9efbc23849b76.png"
+      ]
+    },
+    {
+      "page_no": 9,
+      "caption": "Figure 3 | Core architectures of CSA. It compresses the number of KV entries to 1 𝑚 times, and then applies DeepSeek Sparse Attention for further acceleration. Additionally, a small set of sliding window KV entries is combined with the selected compressed KV entries to enhance local fine-grained dependencies.",
+      "asset": "assets/figure_fallback_page_0009_3_scale_4.png",
+      "crop_bbox": {
+        "l": 75.76593017578125,
+        "t": 758.897331237793,
+        "r": 524.0361938476562,
+        "b": 534.4328308105469
+      },
+      "noise_text_count": 20,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000003_cd0158716b88c77057f1a971c330d52a291e21457558626e2317cf8c75707aa9.png"
+      ]
+    },
+    {
+      "page_no": 15,
+      "caption": "Figure 5 | Illustration of our EP scheme with related works. Comet (Zhang et al., 2025b) overlaps Dispatch with Linear-1, and Linear-2 with Combine, separately. Our EP scheme achieves a finergrained overlapping by splitting and scheduling experts into waves. The theoretical speedup is evaluated in the configuration of the DeepSeek-V4-Flash architecture.",
+      "asset": "assets/figure_fallback_page_0015_5_scale_4.png",
+      "crop_bbox": {
+        "l": 67.73917388916016,
+        "t": 473.98040771484375,
+        "r": 520.2551879882812,
+        "b": 292.920654296875
+      },
+      "noise_text_count": 21,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000005_8296fda5464ba2120b7de63caff455efb8c3682a085e10ac13eec606727fe470.png"
+      ]
+    },
+    {
+      "page_no": 40,
+      "caption": "Figure 8 | Formal reasoning under practical and frontier regimes. Left: Putnam-200 Pass@8 evaluates a fixed random subset of PutnamBench (Tsoukalas et al., 2024) following the setup introduced by Seed-Prover; all models are tested on the same problem set. We follow the SeedProver protocol but replace proprietary search tools with the open-source LeanExplore (Asher, 2025), yielding a lightweight setting with minimal agent tools and bounded sampling. Right: Putnam-2025 probes the frontier of mathematical reasoning in a scaled hybrid formal-informal regime, where informal reasoning is combined with formal verification to expose gaps and improve rigor; DeepSeek-V4 reaches a proof-perfect 120/120.",
+      "asset": "assets/figure_fallback_page_0040_8_scale_4.png",
+      "crop_bbox": {
+        "l": 74.14990234375,
+        "t": 762.9581832885742,
+        "r": 520.4456787109375,
+        "b": 655.8277435302734
+      },
+      "noise_text_count": 19,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000009_81378af23b5dd1cdd81e7a06e7ed0aac154b965f7d29a05c436d27bb87af5ee4.png"
+      ]
+    },
+    {
+      "page_no": 40,
+      "caption": "Figure 9 | DeepSeek-V4 series performance on the MRCR task.",
+      "asset": "assets/figure_fallback_page_0040_9_scale_4.png",
+      "crop_bbox": {
+        "l": 113.69055938720703,
+        "t": 528.5672379009376,
+        "r": 479.5789794921875,
+        "b": 329.0777282714844
+      },
+      "noise_text_count": 32,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000009_81378af23b5dd1cdd81e7a06e7ed0aac154b965f7d29a05c436d27bb87af5ee4.png",
+        "image_000010_1e3a59018a0ebc772195ef5af5c72da3a28af2c7ba7dad9d8db04970f49b0a20.png"
+      ]
+    },
+    {
+      "page_no": 41,
+      "caption": "Figure 10 | HLE and Terminal Bench 2.0 performance by reasoning effort. 'None' indicates Non-think mode, and 'Speciale' indicates DeepSeek-V3.2-Speciale model.",
+      "asset": "assets/figure_fallback_page_0041_10_scale_4.png",
+      "crop_bbox": {
+        "l": 90.27716827392578,
+        "t": 760.9534454345703,
+        "r": 503.4950256347656,
+        "b": 575.7058340959376
+      },
+      "noise_text_count": 30,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000011_770da2fdadef72607fcf1d801fb2d363119fc1a02d259b2f2628732987f8cd38.png"
+      ]
+    },
+    {
+      "page_no": 43,
+      "caption": "Figure 11 | Win-rate comparison across analysis, generation, editing tasks, and the overall performance.",
+      "asset": "assets/figure_fallback_page_0043_11_scale_4.png",
+      "crop_bbox": {
+        "l": 68.4952163696289,
+        "t": 598.4331359863281,
+        "r": 318.94228391750005,
+        "b": 466.6299823484375
+      },
+      "noise_text_count": 26,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000012_2eb868113e38c904f14626ba08d615f5318d404bfec4a6892bbeb9b403abd29e.png"
+      ]
+    },
+    {
+      "page_no": 43,
+      "caption": "Figure 12 | Detailed dimension scores including Task Completion, Content Quality, Formatting Aesthetics, and Instruction Following.",
+      "asset": "assets/figure_fallback_page_0043_12_scale_4.png",
+      "crop_bbox": {
+        "l": 268.34315235,
+        "t": 598.3843231201172,
+        "r": 525.0772094726562,
+        "b": 466.6160741609375
+      },
+      "noise_text_count": 27,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000013_d0694c9bd1ffba0b3d50721517d581d462e8ea7669e8e572f8cd6214cbfc5015.png"
+      ]
+    }
+  ],
+  "pruned_unreferenced_assets": 8,
+  "ocr_mode": "disabled_by_default",
+  "warnings": [
+    "docling_ocr_disabled_for_born_digital_pdf",
+    "docling_picture_description_disabled_use_multimodal_followup",
+    "docling_formula_enrichment_disabled_math_may_be_plain_text",
+    "docling_chart_extraction_disabled_chart_data_may_be_caption_only",
+    "docling_error:component_type=<DoclingComponentType.PIPELINE: 'pipeline'> module_name='StandardPdfPipeline' error_message='Page 52: std::bad_alloc'",
+    "docling_error:component_type=<DoclingComponentType.PIPELINE: 'pipeline'> module_name='StandardPdfPipeline' error_message='Page 53: std::bad_alloc'",
+    "docling_error:component_type=<DoclingComponentType.PIPELINE: 'pipeline'> module_name='StandardPdfPipeline' error_message='Page 54: std::bad_alloc'",
+    "docling_error:component_type=<DoclingComponentType.PIPELINE: 'pipeline'> module_name='StandardPdfPipeline' error_message='Page 55: std::bad_alloc'",
+    "docling_error:component_type=<DoclingComponentType.PIPELINE: 'pipeline'> module_name='StandardPdfPipeline' error_message='Page 56: std::bad_alloc'",
+    "docling_error:component_type=<DoclingComponentType.PIPELINE: 'pipeline'> module_name='StandardPdfPipeline' error_message='Page 57: std::bad_alloc'",
+    "docling_error:component_type=<DoclingComponentType.PIPELINE: 'pipeline'> module_name='StandardPdfPipeline' error_message='Page 58: std::bad_alloc'",
+    "docling_error_repeated_4:component_type=<DoclingComponentType.PIPELINE: 'pipeline'> module_name='StandardPdfPipeline' error_message='Unknown page: pipeline terminated early'",
+    "pypdf_tail_fallback_appended_pages:52-58",
+    "figure_text_soup_fallback_page_1:figure_fallback_page_0001_1_scale_4.png",
+    "figure_text_soup_fallback_page_9:figure_fallback_page_0009_3_scale_4.png",
+    "figure_text_soup_fallback_page_15:figure_fallback_page_0015_5_scale_4.png",
+    "figure_text_soup_fallback_page_40:figure_fallback_page_0040_8_scale_4.png",
+    "figure_text_soup_fallback_page_40:figure_fallback_page_0040_9_scale_4.png",
+    "figure_text_soup_fallback_page_41:figure_fallback_page_0041_10_scale_4.png",
+    "figure_text_soup_fallback_page_43:figure_fallback_page_0043_11_scale_4.png",
+    "figure_text_soup_fallback_page_43:figure_fallback_page_0043_12_scale_4.png"
+  ],
+  "canonical_source": "paper.md",
+  "files": [
+    "metadata.json",
+    "paper.md",
+    "paper.json",
+    "source.pdf",
+    "assets/"
+  ],
+  "notes": [
+    "paper.md is the main reading source for downstream agents.",
+    "paper.json preserves Docling structured output for evidence lookup.",
+    "source.pdf is retained as the original evidence file."
+  ]
+}

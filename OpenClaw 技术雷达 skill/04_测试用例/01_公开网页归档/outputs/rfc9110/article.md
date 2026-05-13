@@ -10,7 +10,7 @@ published: "2022-06"
 description: "The Hypertext Transfer Protocol (HTTP) is a stateless application-level protocol for distributed, collaborative, hypertext information systems. This document describes the overall architecture of HTTP, establishes common terminology, and defines aspects of the protocol that are shared by all versions. In this definition are core protocol elements, extensibility mechanisms, and the \"http\" and \"https\" Uniform Resource Identifier (URI) schemes. This document updates RFC 3864 and obsoletes RFCs 2818, 7231, 7232, 7233, 7235, 7538, 7615, 7694, and portions of 7230."
 image: ""
 language: "en"
-captured_at: "2026-05-07T21:23:32+08:00"
+captured_at: "2026-05-12T11:17:40+08:00"
 extraction_method: "dom-expanded"
 word_count: 89330
 content_chars: 547499

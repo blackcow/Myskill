@@ -52,10 +52,23 @@ python -m venv .venv
 
 输出文件：
 
-- `<video_id>.<language>.original.txt`：原始逐条字幕，保留每条字幕片段时间戳。
-- `<video_id>.<language>.original.json`：原始结构化字幕，保留 YouTube 返回的 `start`、`duration`、`text`。
-- `<video_id>.<language>.original.grouped.md`：启发式分组后的阅读版 Markdown。
-- `<video_id>.<language>.original.grouped.json`：启发式分组后的结构化 JSON。
+```text
+<out-dir>/
+└── <video_id>/
+    ├── metadata.json
+    ├── transcript.md
+    ├── transcript.json
+    ├── raw_transcript.txt
+    └── raw_transcript.json
+```
+
+- `transcript.md`：唯一阅读主文件，给后续 Agent 做摘要、技术雷达分级、技术卡片生成。
+- `transcript.json`：启发式分组后的结构化数据，保留 group 时间戳、speaker、speaker label 和 speaker confidence。
+- `raw_transcript.txt`：原始逐条字幕的可读文本，方便人工快速核对。
+- `raw_transcript.json`：原始结构化字幕，保留 YouTube 返回的 `start`、`duration`、`text`，作为片段级证据源。
+- `metadata.json`：完整抓取元数据，记录输入 URL、canonical URL、选择轨道、选择原因、分组方法、speaker 标记统计和文件清单。
+
+`transcript.md` 会在文件开头保留必要 YAML frontmatter，包括 `source_type`、`source_url`、`video_id`、字幕轨语言码、轨道类型、抓取时间、分组方法、speaker 统计和 `status`。完整抓取细节放入 `metadata.json`。
 
 ## 轨道选择规则
 
@@ -77,7 +90,8 @@ YouTube transcript/caption 的原始片段通常只有 `text`、`start`、`durat
 
 脚本只在字幕文本本身包含显式线索时标记说话人：
 
-- 行首 `>>` 或 `- `：视为新说话轮次，按出现顺序在 `speaker_0` / `speaker_1` 之间交替。
+- 行首 `>>` 或 `- `：只有当同一条字幕里出现足够密集的通用 marker 时，才视为说话人轮换线索；少量 marker 只清理符号，不硬猜 speaker。
+- `[music]`、`[laughter]`、`[applause]`、`[screaming]` 等括号内非语音事件会单独成组，不参与 speaker 轮换。
 - `主持人：`、`嘉宾：`、`访谈者：`、`受访者：`、`Host:`、`Guest:` 等标签：识别为显式 speaker label。
 - 短中文姓名或英文 Title Case 名称后接 `:` / `：`：保守识别为 speaker label；含数字或过长标签会被跳过，避免把比例、章节、普通说明误判成说话人。
 - 一旦出现 speaker 标记，后续无标记碎片会继承当前 speaker，直到出现新的 speaker 标记、长停顿、句子边界或时间上限。
@@ -88,7 +102,18 @@ YouTube transcript/caption 的原始片段通常只有 `text`、`start`、`durat
 - `speaker_detection: "heuristic"`
 - `grouping_method: "speaker-marker-and-sentence"` 或 `"sentence-and-time"`
 - `speaker_markers_found`
+- `generic_marker_count`
+- `generic_marker_alternation_enabled`
 - 每个 group 的 `speaker`、`speaker_label`、`speaker_confidence`
+
+## 后续 Agent 读取规则
+
+默认读取顺序：
+
+1. `transcript.md`：唯一阅读主源。
+2. `transcript.json`：需要精确时间戳、speaker 轮次或片段级证据时读取。
+3. `raw_transcript.json` / `raw_transcript.txt`：需要回到 YouTube 原始字幕片段时读取。
+4. `metadata.json`：需要查看轨道选择、抓取方式、warning 或目录契约时读取。
 
 ## 已验证样例
 
@@ -100,7 +125,8 @@ python "D:\project\Myskill\OpenClaw 技术雷达 skill\02_采集与归档方案\
   --out-dir "D:\project\Myskill\OpenClaw 技术雷达 skill\04_测试用例\02_youtube逐字稿\outputs" `
   "https://www.youtube.com/watch?v=V9eI-t3TApE&t=1s" `
   "https://www.youtube.com/watch?v=96jN2OCOfLs&t=25s" `
-  "https://www.youtube.com/watch?v=ttkd0t5qTD4"
+  "https://www.youtube.com/watch?v=ttkd0t5qTD4" `
+  "https://www.youtube.com/watch?v=igO8iyca2_g"
 ```
 
 验证结果：
@@ -108,8 +134,20 @@ python "D:\project\Myskill\OpenClaw 技术雷达 skill\02_采集与归档方案\
 | 视频 | 选择轨道 | 轨道类型 | 原始片段数 | 分组数 | speaker 标记数 | 分组方法 | 说明 |
 | --- | --- | --- | ---: | ---: | ---: | --- | --- |
 | `V9eI-t3TApE` | `zh-Hans` | manual | 6221 | 413 | 0 | `sentence-and-time` | 中文字幕无可靠 speaker 标记，只做句子/时间合并。 |
-| `96jN2OCOfLs` | `en` | generated | 893 | 99 | 35 | `speaker-marker-and-sentence` | 自动字幕包含 `>>` 标记，启发式区分为 `speaker_0` / `speaker_1`。 |
+| `96jN2OCOfLs` | `en` | generated | 893 | 101 | 35 | `speaker-marker-and-sentence` | 自动字幕包含密集 `>>` 标记，启发式区分为 `speaker_0` / `speaker_1`；括号内事件单独成组。 |
 | `ttkd0t5qTD4` | `en-US` | manual | 6889 | 435 | 0 | `sentence-and-time` | 另一个 `en-GB` 轨带翻译声明被跳过；`en-US` 轨语言码像英文，但正文是中文访谈原文/混合内容。 |
+| `igO8iyca2_g` | `en` | generated | 855 | 114 | 0 | `sentence-and-time` | 只有英文自动字幕轨；少量 `>>` marker 来自舞台事件/段落起点，不启用 speaker 轮换。 |
+
+四条样例均输出为：
+
+```text
+outputs/<video_id>/
+├── metadata.json
+├── transcript.md
+├── transcript.json
+├── raw_transcript.txt
+└── raw_transcript.json
+```
 
 ## `yt-dlp` 辅助命令
 

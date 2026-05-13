@@ -1,0 +1,27 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - button "中文" [ref=e7] [cursor=pointer]:
+      - img
+      - text: 中文
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - img "Nanobot"
+        - generic:
+          - generic: Nanobot
+          - generic: 登录
+      - generic:
+        - generic:
+          - generic:
+            - text: 用户名
+            - generic:
+              - img
+              - textbox "用户名"
+          - generic:
+            - text: 密码
+            - generic:
+              - img
+              - textbox "密码"
+          - button "登录"
+  - region "Notifications alt+T"

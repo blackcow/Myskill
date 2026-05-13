@@ -74,7 +74,7 @@ python -m venv .venv
 
 ```text
 yyyy-MM-dd-文章标题/
-├── README.md
+├── metadata.json
 ├── article.md
 └── assets/
 ```
@@ -83,13 +83,14 @@ yyyy-MM-dd-文章标题/
 
 默认读取顺序：
 
-1. `README.md`：只看来源、最终 URL、抓取方式、资源统计、注意事项。
-2. `article.md`：唯一正文主源，用于摘要、问答、技术雷达打分、技术卡片生成、认知资产沉淀。
+1. `article.md`：唯一正文主源，用于摘要、问答、技术雷达打分、技术卡片生成、认知资产沉淀。
+2. `metadata.json`：完整抓取元数据和调试信息，用于查看最终 URL、canonical URL、抓取方式、资源统计、warning 和目录契约。
 3. `assets/`：只有需要看图片、图示时才读取。
 
-`article.md` 会包含 YAML frontmatter：
+正文文件统一在文件开头保留必要 YAML frontmatter，便于后续 Agent 不读取额外文件也能知道来源和解析状态。公开网页的 `article.md` 形如：
 
 ```yaml
+---
 source_type: public_web_page
 source_url: 原始输入 URL
 final_url: 重定向后的最终 URL
@@ -108,6 +109,7 @@ content_chars: 正文字符数
 content_sha256: 正文内容哈希
 asset_count: 本地图片数量
 status: raw
+---
 ```
 
 ## OpenClaw 调用约定
@@ -132,9 +134,9 @@ CLI 标准输出为 JSON。单 URL 时返回对象，多 URL 时返回数组。
 
 归档完成后检查：
 
-- 目录内包含 `README.md`、`article.md`、`assets/`。
-- `README.md` 记录原始链接、最终链接、站点、作者、发布时间和抓取方式。
-- `article.md` 有 frontmatter 和正文。
+- 目录内包含 `metadata.json`、`article.md`、`assets/`。
+- `article.md` 以 YAML frontmatter 开头，正文紧随其后。
+- `metadata.json` 记录原始链接、最终链接、canonical URL、站点、作者、发布时间、抓取方式、warning 和文件清单。
 - 正文不应包含明显导航、页脚、脚本、广告等页面噪声。
 - OpenClaw 可以只读取 `article.md` 继续执行技术雷达分级。
 

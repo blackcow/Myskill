@@ -5,7 +5,7 @@
 ## 输出位置
 
 - `outputs/`：每个子目录是一条网页归档结果。
-- 每条结果通常包含 `README.md`、`article.md`，下载图片用例还包含 `assets/`。
+- 每条结果通常包含 `metadata.json`、`article.md`，下载图片用例还包含 `assets/`。
 
 ## 用例清单
 
@@ -19,4 +19,4 @@
 
 ## 回归检查
 
-重点检查 `article.md` 的正文长度、frontmatter、`extraction_method`、`asset_count` 和 `warnings`。如果新脚本输出明显更短或混入导航/页脚，优先看对应目录的 `README.md` 和 `article.md` 差异。
+重点检查 `article.md` 的正文长度、frontmatter，以及 `metadata.json` 中的 `extraction_method`、`asset_count` 和 `warnings`。如果新脚本输出明显更短或混入导航/页脚，优先对比对应目录的 `metadata.json` 和 `article.md`。

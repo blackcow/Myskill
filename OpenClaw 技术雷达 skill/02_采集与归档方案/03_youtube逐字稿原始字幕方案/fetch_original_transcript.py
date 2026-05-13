@@ -18,6 +18,7 @@ import re
 import sys
 import time
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Iterable, Sequence
 from urllib.parse import parse_qs, urlparse
@@ -75,6 +76,7 @@ COLON_SPEAKER_RE = re.compile(
     r"^\s*(?P<label>[A-Za-z\u4e00-\u9fff][A-Za-z0-9\u4e00-\u9fff ._\-\u00b7]{0,23})"
     r"\s*[:\uff1a]\s*(?P<body>.+)$"
 )
+NON_SPEECH_EVENT_RE = re.compile(r"^\s*[\[(（【].{1,40}[\])）】]\s*$")
 KNOWN_SPEAKER_LABELS = {
     "host",
     "interviewer",
@@ -113,6 +115,7 @@ NON_SPEAKER_LABELS = {
 }
 MAX_GROUP_GAP_SECONDS = 8.0
 MAX_GROUP_SPAN_SECONDS = 30.0
+MIN_GENERIC_MARKERS_FOR_ALTERNATION = 8
 
 
 def parse_video_id(value: str) -> str:
@@ -299,6 +302,29 @@ def parse_colon_speaker(text: str) -> tuple[str | None, str]:
     return label, body
 
 
+def is_non_speech_event(text: str) -> bool:
+    normalized = normalize_text(text)
+    if not NON_SPEECH_EVENT_RE.match(normalized):
+        return False
+    lowered = normalized.lower()
+    event_words = (
+        "applause",
+        "clapping",
+        "laughter",
+        "laughs",
+        "music",
+        "screaming",
+        "cheering",
+        "inaudible",
+        "\u638c\u58f0",
+        "\u7b11\u58f0",
+        "\u97f3\u4e50",
+        "\u6b22\u547c",
+        "\u542c\u4e0d\u6e05",
+    )
+    return any(word in lowered or word in normalized for word in event_words)
+
+
 def allocate_speaker(
     key: str,
     label: str | None,
@@ -318,10 +344,14 @@ def detect_speaker(
     speaker_ids: dict[str, str],
     speaker_labels: dict[str, str | None],
     marker_state: dict[str, object],
+    allow_generic_markers: bool,
 ) -> tuple[str, str | None, str | None, str]:
     marker_match = LEADING_SPEAKER_MARKER_RE.match(text)
     marker_found = marker_match is not None
     body = normalize_text(marker_match.group("body")) if marker_match else text
+
+    if is_non_speech_event(body):
+        return body, None, None, "event"
 
     label, body_without_label = parse_colon_speaker(body)
     if label:
@@ -329,7 +359,7 @@ def detect_speaker(
         speaker_id = allocate_speaker(key, label, speaker_ids, speaker_labels)
         return body_without_label, speaker_id, label, "explicit_label"
 
-    if marker_found:
+    if marker_found and allow_generic_markers:
         marker_ids = marker_state.setdefault("speaker_ids", [])
         if not isinstance(marker_ids, list):
             marker_ids = []
@@ -344,6 +374,9 @@ def detect_speaker(
         marker_state["last_speaker"] = speaker_id
         return body, speaker_id, None, "marker_alternating"
 
+    if marker_found:
+        return body, None, None, "none"
+
     return text, None, None, "none"
 
 
@@ -352,6 +385,8 @@ def sentence_finished(text: str) -> bool:
 
 
 def should_start_group(current: TranscriptGroup, segment: TranscriptSegment) -> bool:
+    if current.speaker_confidence == "event" or segment.speaker_confidence == "event":
+        return True
     if segment.speaker and current.speaker != segment.speaker:
         return True
     if segment.start - current.end > MAX_GROUP_GAP_SECONDS:
@@ -359,6 +394,23 @@ def should_start_group(current: TranscriptGroup, segment: TranscriptSegment) -> 
     if current.end - current.start >= MAX_GROUP_SPAN_SECONDS:
         return True
     return sentence_finished(current.text)
+
+
+def count_generic_speaker_markers(raw_rows: Sequence[dict]) -> int:
+    count = 0
+    for row in raw_rows:
+        text = normalize_text(row.get("text", ""))
+        marker_match = LEADING_SPEAKER_MARKER_RE.match(text)
+        if not marker_match:
+            continue
+        body = normalize_text(marker_match.group("body"))
+        if is_non_speech_event(body):
+            continue
+        label, _ = parse_colon_speaker(body)
+        if label:
+            continue
+        count += 1
+    return count
 
 
 def build_grouped_transcript(raw_rows: Sequence[dict]) -> tuple[list[TranscriptGroup], dict]:
@@ -369,22 +421,24 @@ def build_grouped_transcript(raw_rows: Sequence[dict]) -> tuple[list[TranscriptG
     speaker_markers_found = 0
     active_speaker: str | None = None
     active_label: str | None = None
+    generic_marker_count = count_generic_speaker_markers(raw_rows)
+    allow_generic_markers = generic_marker_count >= MIN_GENERIC_MARKERS_FOR_ALTERNATION
 
     for row in raw_rows:
         text = normalize_text(row.get("text", ""))
         if not text:
             continue
         clean_text, speaker, label, confidence = detect_speaker(
-            text, speaker_ids, speaker_labels, marker_state
+            text, speaker_ids, speaker_labels, marker_state, allow_generic_markers
         )
         clean_text = normalize_text(clean_text)
         if not clean_text:
             continue
-        if confidence != "none":
+        if confidence not in ("none", "event"):
             speaker_markers_found += 1
             active_speaker = speaker
             active_label = label
-        elif active_speaker:
+        elif confidence == "none" and active_speaker:
             speaker = active_speaker
             label = active_label
             confidence = "inherited_marker"
@@ -432,6 +486,8 @@ def build_grouped_transcript(raw_rows: Sequence[dict]) -> tuple[list[TranscriptG
         "speaker_detection": "heuristic",
         "grouping_method": grouping_method,
         "speaker_markers_found": speaker_markers_found,
+        "generic_marker_count": generic_marker_count,
+        "generic_marker_alternation_enabled": allow_generic_markers,
         "speakers": [
             {"speaker": speaker_id, "label": speaker_labels.get(speaker_id)}
             for speaker_id in sorted(speaker_labels)
@@ -478,48 +534,64 @@ def speaker_display(group: TranscriptGroup) -> str | None:
     return group.speaker
 
 
-def write_outputs(out_dir: Path, fetched: object, selection: Selection) -> tuple[Path, Path, Path, Path]:
+def canonical_youtube_url(video_id: str) -> str:
+    return f"https://www.youtube.com/watch?v={video_id}"
+
+
+def write_outputs(
+    out_dir: Path, fetched: object, selection: Selection, input_value: str
+) -> tuple[Path, Path, Path, Path, Path]:
     out_dir.mkdir(parents=True, exist_ok=True)
     video_id = fetched.video_id
     language_code = safe_name(fetched.language_code)
-    base = out_dir / f"{video_id}.{language_code}.original"
+    video_dir = out_dir / video_id
+    video_dir.mkdir(parents=True, exist_ok=True)
 
     raw_rows = fetched.to_raw_data()
     groups, group_meta = build_grouped_transcript(raw_rows)
-    json_path = Path(f"{base}.json")
-    txt_path = Path(f"{base}.txt")
-    grouped_json_path = Path(f"{base}.grouped.json")
-    grouped_md_path = Path(f"{base}.grouped.md")
+    metadata_path = video_dir / "metadata.json"
+    raw_json_path = video_dir / "raw_transcript.json"
+    raw_txt_path = video_dir / "raw_transcript.txt"
+    transcript_json_path = video_dir / "transcript.json"
+    transcript_md_path = video_dir / "transcript.md"
+    captured_at = datetime.now().astimezone().isoformat(timespec="seconds")
+    track_kind = "generated" if fetched.is_generated else "manual"
+    source_url = canonical_youtube_url(video_id)
 
     payload = {
         "video_id": video_id,
+        "source_url": source_url,
         "language": fetched.language,
         "language_code": fetched.language_code,
         "is_generated": fetched.is_generated,
+        "track_kind": track_kind,
         "selection_reason": selection.reason,
         "selection_confidence": selection.confidence,
         "snippets": raw_rows,
     }
-    json_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    raw_json_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
     grouped_payload = {
         "video_id": video_id,
+        "source_url": source_url,
         "language": fetched.language,
         "language_code": fetched.language_code,
         "is_generated": fetched.is_generated,
+        "track_kind": track_kind,
         "selection_reason": selection.reason,
         "selection_confidence": selection.confidence,
         **group_meta,
         "groups": [group_to_raw(group) for group in groups],
     }
-    grouped_json_path.write_text(
+    transcript_json_path.write_text(
         json.dumps(grouped_payload, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
     lines = [
         f"# video_id: {video_id}",
+        f"# source_url: {source_url}",
         f"# language: {fetched.language} ({fetched.language_code})",
-        f"# generated: {fetched.is_generated}",
+        f"# track_kind: {track_kind}",
         f"# selection: {selection.confidence} - {selection.reason}",
         "",
     ]
@@ -528,19 +600,26 @@ def write_outputs(out_dir: Path, fetched: object, selection: Selection) -> tuple
         text = str(row["text"]).replace("\n", " ").strip()
         if text:
             lines.append(f"[{stamp}] {text}")
-    txt_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    raw_txt_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     md_lines = [
         "---",
+        'source_type: "youtube_transcript"',
+        f"source_url: {markdown_value(source_url)}",
         f"video_id: {markdown_value(video_id)}",
         f"language: {markdown_value(fetched.language)}",
-        f"language_code: {markdown_value(fetched.language_code)}",
-        f"generated: {markdown_value(fetched.is_generated)}",
+        f"track_language_code: {markdown_value(fetched.language_code)}",
+        f"track_kind: {markdown_value(track_kind)}",
+        f"captured_at: {markdown_value(captured_at)}",
         f"selection_confidence: {markdown_value(selection.confidence)}",
         f"selection_reason: {markdown_value(selection.reason)}",
         f"speaker_detection: {markdown_value(group_meta['speaker_detection'])}",
         f"grouping_method: {markdown_value(group_meta['grouping_method'])}",
         f"speaker_markers_found: {group_meta['speaker_markers_found']}",
+        f"raw_segment_count: {len(raw_rows)}",
+        f"group_count: {len(groups)}",
+        'canonical_source: "transcript.md"',
+        'status: "raw"',
         "---",
         "",
         "# Transcript",
@@ -554,8 +633,55 @@ def write_outputs(out_dir: Path, fetched: object, selection: Selection) -> tuple
         else:
             md_lines.append(f"**[{stamp}]** {group.text}")
         md_lines.append("")
-    grouped_md_path.write_text("\n".join(md_lines).rstrip() + "\n", encoding="utf-8")
-    return json_path, txt_path, grouped_json_path, grouped_md_path
+    transcript_text = "\n".join(md_lines).rstrip() + "\n"
+    transcript_md_path.write_text(transcript_text, encoding="utf-8")
+
+    metadata = {
+        "schema_version": 1,
+        "source_type": "youtube_transcript",
+        "input": input_value,
+        "source_url": source_url,
+        "video_id": video_id,
+        "language": fetched.language,
+        "track_language_code": fetched.language_code,
+        "is_generated": fetched.is_generated,
+        "track_kind": track_kind,
+        "captured_at": captured_at,
+        "selection_reason": selection.reason,
+        "selection_confidence": selection.confidence,
+        **group_meta,
+        "raw_segment_count": len(raw_rows),
+        "group_count": len(groups),
+        "content_chars": len(transcript_text),
+        "canonical_source": "transcript.md",
+        "files": [
+            "metadata.json",
+            "transcript.md",
+            "transcript.json",
+            "raw_transcript.txt",
+            "raw_transcript.json",
+        ],
+        "notes": [
+            "The main Markdown transcript is grouped heuristically for reading.",
+            "Speaker fields are inferred only from explicit subtitle text markers, not audio diarization.",
+            "raw_transcript.json preserves the original YouTube transcript snippets for evidence.",
+        ],
+    }
+    metadata_path.write_text(
+        json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+
+    legacy_base = out_dir / f"{video_id}.{language_code}.original"
+    for legacy_path in (
+        Path(f"{legacy_base}.txt"),
+        Path(f"{legacy_base}.json"),
+        Path(f"{legacy_base}.grouped.md"),
+        Path(f"{legacy_base}.grouped.json"),
+    ):
+        if legacy_path.exists():
+            legacy_path.unlink()
+
+    return metadata_path, raw_txt_path, raw_json_path, transcript_md_path, transcript_json_path
 
 
 def process_video(api: YouTubeTranscriptApi, url_or_id: str, out_dir: Path, attempts: int) -> None:
@@ -570,17 +696,25 @@ def process_video(api: YouTubeTranscriptApi, url_or_id: str, out_dir: Path, atte
         attempts=attempts,
         label=f"fetch {video_id} {selection.track.language_code}",
     )
-    json_path, txt_path, grouped_json_path, grouped_md_path = write_outputs(out_dir, fetched, selection)
+    (
+        metadata_path,
+        raw_txt_path,
+        raw_json_path,
+        transcript_md_path,
+        transcript_json_path,
+    ) = write_outputs(out_dir, fetched, selection, input_value=url_or_id)
 
     track_type = "generated" if fetched.is_generated else "manual"
     print(
         f"{video_id}: {fetched.language_code} ({track_type}, {selection.confidence}) "
-        f"-> {txt_path}"
+        f"-> {transcript_md_path.parent}"
     )
     print(f"  reason: {selection.reason}")
-    print(f"  json: {json_path}")
-    print(f"  grouped: {grouped_md_path}")
-    print(f"  grouped json: {grouped_json_path}")
+    print(f"  metadata: {metadata_path}")
+    print(f"  transcript: {transcript_md_path}")
+    print(f"  transcript json: {transcript_json_path}")
+    print(f"  raw txt: {raw_txt_path}")
+    print(f"  raw json: {raw_json_path}")
 
 
 def parse_args(argv: Sequence[str]) -> argparse.Namespace:
@@ -591,7 +725,7 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument(
         "--out-dir",
         default="transcripts",
-        help="Output directory for .txt and .json files. Default: transcripts",
+        help="Output root directory. Each video gets a subdirectory. Default: transcripts",
     )
     parser.add_argument(
         "--attempts",

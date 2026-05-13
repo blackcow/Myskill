@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "source_type": "wechat_article",
+  "source_url": "https://mp.weixin.qq.com/s/NmYcxPkGABkwYzG2WwZrSA",
+  "title": "别再把长文切碎了，HiLight让AI直接在原文里划重点",
+  "published": "2026-05-10 10:55:07 +08:00",
+  "wechat_account_id": "gh_dbc0a5474692",
+  "biz": "MzA3MzI4MjgzMw==",
+  "mid": "2651032177",
+  "idx": "2",
+  "sn": "3065f897e1752403109020fbb51fa338",
+  "captured_at": "2026-05-12T14:17:54+08:00",
+  "fetch_method": "desktop-chrome",
+  "text_source": "#js_content with content_noencode fallback",
+  "image_count": 11,
+  "video_count": 0,
+  "asset_count": 10,
+  "content_chars": 3445,
+  "content_sha256": "323bf0f725c17123da1edb31c43970bf714ac7574af8db6e27f0f4e9c9a4f042",
+  "canonical_source": "article.md",
+  "files": [
+    "metadata.json",
+    "article.md",
+    "assets/"
+  ],
+  "notes": [
+    "This archive intentionally omits original HTML, PDF, screenshots, and intermediate files.",
+    "Do not treat parameterized long WeChat URLs as a stable fallback.",
+    "If video exists, the Markdown keeps a local video cover and the original video link."
+  ]
+}

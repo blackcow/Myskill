@@ -1,0 +1,23 @@
+- generic [active] [ref=e1]:
+  - img
+  - generic [ref=e6]:
+    - generic [ref=e10]: 视频号
+    - img [ref=e12]
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19] [cursor=pointer]: "在飞机上琢磨了研究场景的Agent Teams有哪些必要角色，下了飞机迅速查了下Anthropic的设计哲学，发现他们讲的是面向编程场景的Agent Teams的编排，跟我讲的研究场景还是有很大区别的，尽快分享一下，跟有需要做研究的朋友们分享下。#AgentTeams #Agent #智能体编排 #Anthropic #AI"
+        - generic [ref=e20]: 2026年3月27日
+      - generic [ref=e24]:
+        - generic [ref=e26] [cursor=pointer]:
+          - img [ref=e28]
+          - generic [ref=e29]: 晓辉博士
+          - img [ref=e31]
+        - generic [ref=e33]:
+          - generic [ref=e36] [cursor=pointer]: "1164"
+          - generic [ref=e39] [cursor=pointer]: "1620"
+          - generic [ref=e42] [cursor=pointer]: "465"
+          - generic [ref=e45] [cursor=pointer]: "91"
+  - generic [ref=e54]:
+    - button "关闭" [ref=e55] [cursor=pointer]
+    - img "二维码" [ref=e58]
+    - generic [ref=e59]: 可扫码前往微信观看此内容

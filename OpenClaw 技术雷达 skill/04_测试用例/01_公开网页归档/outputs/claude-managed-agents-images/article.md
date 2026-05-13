@@ -10,7 +10,7 @@ published: "2026-05-06"
 description: "Dreaming, outcomes, and multiagent orchestration are now available in Claude Managed Agents. Build agents that learn, meet a quality bar, and work in parallel."
 image: "https://cdn.prod.website-files.com/68a44d4040f98a4adf2207b6/69f8f45a1207e94fecb1fba5_og_claude-managed-agents-updates.jpg"
 language: "en-US"
-captured_at: "2026-05-07T21:23:40+08:00"
+captured_at: "2026-05-12T11:18:45+08:00"
 extraction_method: "trafilatura"
 word_count: 1017
 content_chars: 6459

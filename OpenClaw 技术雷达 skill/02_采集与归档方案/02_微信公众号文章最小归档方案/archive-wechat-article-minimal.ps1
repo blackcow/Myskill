@@ -156,12 +156,6 @@ function Build-StructuredMarkdown(
     $md = New-Object System.Collections.Generic.List[string]
     $md.Add("# $Title")
     $md.Add('')
-    $md.Add('---')
-    $md.Add("source: $SourceUrl")
-    if ($PublishTime) { $md.Add("published: $PublishTime") }
-    if ($AccountId) { $md.Add("wechat_account_id: $AccountId") }
-    $md.Add('---')
-    $md.Add('')
 
     $tokens = [regex]::Matches(
         $LocalContent,
@@ -310,6 +304,43 @@ function Remove-UnusedAssets([string]$AssetsDir, [System.Collections.Generic.Lis
     }
 }
 
+function ConvertTo-YamlScalar([object]$Value) {
+    if ($null -eq $Value) { return '""' }
+    if ($Value -is [bool]) {
+        if ($Value) { return 'true' }
+        return 'false'
+    }
+    if ($Value -is [int] -or $Value -is [long]) { return [string]$Value }
+    return (($Value | ConvertTo-Json -Compress) -replace "`r?`n", '')
+}
+
+function Get-Sha256Hex([string]$Text) {
+    $sha = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
+        return (($sha.ComputeHash($bytes) | ForEach-Object { $_.ToString('x2') }) -join '')
+    } finally {
+        $sha.Dispose()
+    }
+}
+
+function Add-Frontmatter(
+    [System.Collections.Generic.List[string]]$BodyLines,
+    [System.Collections.Specialized.OrderedDictionary]$Fields
+) {
+    $md = New-Object System.Collections.Generic.List[string]
+    $md.Add('---')
+    foreach ($key in $Fields.Keys) {
+        $md.Add("$key`: $(ConvertTo-YamlScalar $Fields[$key])")
+    }
+    $md.Add('---')
+    $md.Add('')
+    foreach ($line in $BodyLines) {
+        $md.Add($line)
+    }
+    return $md
+}
+
 $fetch = Invoke-WeChatHtml $Url
 $html = $fetch.Html
 
@@ -404,45 +435,75 @@ foreach ($vm in $videoMatches) {
     $videoIndex++
 }
 
-$structuredMd = Build-StructuredMarkdown $title $Url $publishTime $accountId $localContent
-$structuredMd = Remove-TrailingPromoBlocks $structuredMd
-[System.IO.File]::WriteAllLines((Join-Path $outDir 'article.structured.local.md'), $structuredMd, [System.Text.UTF8Encoding]::new($false))
-Remove-UnusedAssets $assetsDir $structuredMd
+$bodyMd = Build-StructuredMarkdown $title $Url $publishTime $accountId $localContent
+$bodyMd = Remove-TrailingPromoBlocks $bodyMd
+Remove-UnusedAssets $assetsDir $bodyMd
 $assetCount = (Get-ChildItem -LiteralPath $assetsDir -File | Measure-Object).Count
+$bodyText = (($bodyMd | Where-Object { $null -ne $_ }) -join "`n").Trim()
+$capturedAt = [DateTimeOffset]::Now.ToString('yyyy-MM-ddTHH:mm:sszzz')
+$contentHash = Get-Sha256Hex $bodyText
+$contentChars = $bodyText.Length
 
-$readmeLines = New-Object System.Collections.Generic.List[string]
-$readmeLines.Add("# $title")
-$readmeLines.Add('')
-$readmeLines.Add("source: $Url")
-if ($publishTime) { $readmeLines.Add("published: $publishTime") }
-if ($accountId) { $readmeLines.Add("wechat_account_id: $accountId") }
-if ($biz) { $readmeLines.Add("biz: $biz") }
-if ($mid) { $readmeLines.Add("mid: $mid") }
-if ($idx) { $readmeLines.Add("idx: $idx") }
-if ($sn) { $readmeLines.Add("sn: $sn") }
-$readmeLines.Add("fetch_method: $($fetch.Method)")
-$readmeLines.Add("text_source: #js_content with content_noencode fallback")
-$readmeLines.Add("image_count: $($imageUrls.Count)")
-$readmeLines.Add("video_count: $($videoRows.Count)")
-$readmeLines.Add("asset_count: $assetCount")
-$readmeLines.Add('')
-$readmeLines.Add('canonical_source: article.structured.local.md')
-$readmeLines.Add('')
-$readmeLines.Add('Agent reading order:')
-$readmeLines.Add('1. README.md for metadata.')
-$readmeLines.Add('2. article.structured.local.md for the article body.')
-$readmeLines.Add('3. assets/ only when images or video covers are needed.')
-$readmeLines.Add('')
-$readmeLines.Add('Directory contract:')
-$readmeLines.Add('- README.md')
-$readmeLines.Add('- article.structured.local.md')
-$readmeLines.Add('- assets/')
-$readmeLines.Add('')
-$readmeLines.Add('Notes:')
-$readmeLines.Add('- This archive intentionally omits original HTML, PDF, screenshots, and intermediate files.')
-$readmeLines.Add('- Do not treat parameterized long WeChat URLs as a stable fallback.')
-$readmeLines.Add('- If video exists, the Markdown keeps a local video cover and the original video link.')
-[System.IO.File]::WriteAllLines((Join-Path $outDir 'README.md'), $readmeLines, [System.Text.UTF8Encoding]::new($false))
+$frontmatterFields = [ordered]@{
+    source_type = 'wechat_article'
+    source_url = $Url
+    title = $title
+    published = $publishTime
+    wechat_account_id = $accountId
+    captured_at = $capturedAt
+    fetch_method = $fetch.Method
+    text_source = '#js_content with content_noencode fallback'
+    image_count = $imageUrls.Count
+    video_count = $videoRows.Count
+    asset_count = $assetCount
+    content_chars = $contentChars
+    content_sha256 = $contentHash
+    status = 'raw'
+}
+$structuredMd = Add-Frontmatter $bodyMd $frontmatterFields
+[System.IO.File]::WriteAllLines((Join-Path $outDir 'article.md'), $structuredMd, [System.Text.UTF8Encoding]::new($false))
+
+$metadata = [ordered]@{
+    schema_version = 1
+    source_type = 'wechat_article'
+    source_url = $Url
+    title = $title
+    published = $publishTime
+    wechat_account_id = $accountId
+    biz = $biz
+    mid = $mid
+    idx = $idx
+    sn = $sn
+    captured_at = $capturedAt
+    fetch_method = $fetch.Method
+    text_source = '#js_content with content_noencode fallback'
+    image_count = $imageUrls.Count
+    video_count = $videoRows.Count
+    asset_count = $assetCount
+    content_chars = $contentChars
+    content_sha256 = $contentHash
+    canonical_source = 'article.md'
+    files = @('metadata.json', 'article.md', 'assets/')
+    notes = @(
+        'This archive intentionally omits original HTML, PDF, screenshots, and intermediate files.',
+        'Do not treat parameterized long WeChat URLs as a stable fallback.',
+        'If video exists, the Markdown keeps a local video cover and the original video link.'
+    )
+}
+[System.IO.File]::WriteAllText(
+    (Join-Path $outDir 'metadata.json'),
+    (($metadata | ConvertTo-Json -Depth 6) + "`n"),
+    [System.Text.UTF8Encoding]::new($false)
+)
+$oldReadme = Join-Path $outDir 'README.md'
+if (Test-Path -LiteralPath $oldReadme) {
+    Remove-Item -LiteralPath $oldReadme -Force
+}
+
+$oldStructuredArticle = Join-Path $outDir 'article.structured.local.md'
+if (Test-Path -LiteralPath $oldStructuredArticle) {
+    Remove-Item -LiteralPath $oldStructuredArticle -Force
+}
 
 $result = [pscustomobject]@{
     OutDir = $outDir
@@ -452,7 +513,7 @@ $result = [pscustomobject]@{
     ImageCount = $imageUrls.Count
     VideoCount = $videoRows.Count
     AssetCount = $assetCount
-    Files = @('README.md', 'article.structured.local.md', 'assets/')
+    Files = @('metadata.json', 'article.md', 'assets/')
 }
 
 $result | ConvertTo-Json -Depth 4

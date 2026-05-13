@@ -1,0 +1,86 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - complementary [ref=e4]:
+      - generic [ref=e5]:
+        - img "Nanobot" [ref=e6]
+        - button "折叠菜单" [ref=e7] [cursor=pointer]:
+          - img [ref=e8]
+      - navigation [ref=e11]:
+        - generic [ref=e12]:
+          - paragraph [ref=e13]: 通用
+          - generic [ref=e14]:
+            - link "仪表板" [ref=e15] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e16]
+              - generic [ref=e21]: 仪表板
+            - link "会话" [ref=e22] [cursor=pointer]:
+              - /url: /chat
+              - img [ref=e23]
+              - generic [ref=e25]: 会话
+        - generic [ref=e26]:
+          - paragraph [ref=e27]: 管理
+          - generic [ref=e28]:
+            - link "代理" [ref=e29] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e30]
+              - generic [ref=e33]: 代理
+            - link "通道" [ref=e34] [cursor=pointer]:
+              - /url: /channels
+              - img [ref=e35]
+              - generic [ref=e41]: 通道
+            - link "工具" [ref=e42] [cursor=pointer]:
+              - /url: /tools
+              - img [ref=e43]
+              - generic [ref=e45]: 工具
+            - link "用户" [ref=e46] [cursor=pointer]:
+              - /url: /users
+              - img [ref=e47]
+              - generic [ref=e52]: 用户
+            - link "定时任务" [ref=e53] [cursor=pointer]:
+              - /url: /cron
+              - img [ref=e54]
+              - generic [ref=e57]: 定时任务
+            - link "系统配置" [ref=e58] [cursor=pointer]:
+              - /url: /system-config
+              - img [ref=e59]
+              - generic [ref=e64]: 系统配置
+      - generic [ref=e66]:
+        - button "A admin" [ref=e67] [cursor=pointer]:
+          - generic [ref=e68]: A
+          - generic [ref=e69]: admin
+        - button "深色模式" [ref=e70] [cursor=pointer]:
+          - img [ref=e71]
+    - main [ref=e73]:
+      - generic [ref=e74]:
+        - generic [ref=e75]:
+          - generic [ref=e78]:
+            - generic [ref=e79]:
+              - paragraph [ref=e80]: 通道状态
+              - paragraph [ref=e82]: 运行中
+            - img [ref=e84]
+          - generic [ref=e92]:
+            - generic [ref=e93]:
+              - paragraph [ref=e94]: 技能数量
+              - paragraph [ref=e96]: 活跃
+            - img [ref=e98]
+          - generic [ref=e102]:
+            - generic [ref=e103]:
+              - paragraph [ref=e104]: 定时任务
+              - paragraph [ref=e106]: 活跃
+            - img [ref=e108]
+          - generic [ref=e113]:
+            - generic [ref=e114]:
+              - paragraph [ref=e115]: 会话数量
+              - paragraph [ref=e117]: 活跃
+            - img [ref=e119]
+        - generic [ref=e122]:
+          - generic [ref=e123]: 通道状态
+          - link "管理通道 →" [ref=e124] [cursor=pointer]:
+            - /url: /channels
+        - generic [ref=e132]:
+          - generic [ref=e133]:
+            - img [ref=e134]
+            - text: 版本信息
+          - button [disabled] [ref=e139]:
+            - img [ref=e140]
+  - region "Notifications alt+T"

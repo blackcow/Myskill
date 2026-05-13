@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "source_type": "youtube_transcript",
+  "input": "https://www.youtube.com/watch?v=igO8iyca2_g",
+  "source_url": "https://www.youtube.com/watch?v=igO8iyca2_g",
+  "video_id": "igO8iyca2_g",
+  "language": "English (auto-generated)",
+  "track_language_code": "en",
+  "is_generated": true,
+  "track_kind": "generated",
+  "captured_at": "2026-05-13T10:14:39+08:00",
+  "selection_reason": "generated track is the only detected source-language track",
+  "selection_confidence": "medium",
+  "speaker_detection": "heuristic",
+  "grouping_method": "sentence-and-time",
+  "speaker_markers_found": 0,
+  "generic_marker_count": 5,
+  "generic_marker_alternation_enabled": false,
+  "speakers": [],
+  "raw_segment_count": 855,
+  "group_count": 114,
+  "content_chars": 34448,
+  "canonical_source": "transcript.md",
+  "files": [
+    "metadata.json",
+    "transcript.md",
+    "transcript.json",
+    "raw_transcript.txt",
+    "raw_transcript.json"
+  ],
+  "notes": [
+    "The main Markdown transcript is grouped heuristically for reading.",
+    "Speaker fields are inferred only from explicit subtitle text markers, not audio diarization.",
+    "raw_transcript.json preserves the original YouTube transcript snippets for evidence."
+  ]
+}

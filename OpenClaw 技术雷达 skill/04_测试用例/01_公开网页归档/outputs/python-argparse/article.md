@@ -6,11 +6,11 @@ canonical_url: "https://docs.python.org/3/library/argparse.html"
 title: "argparse — Parser for command-line options, arguments and subcommands"
 site: "Python documentation"
 author: ""
-published: "2026-05-07"
+published: "2026-05-12"
 description: "Source code: Lib/argparse.py Tutorial: This page contains the API reference information. For a more gentle introduction to Python command-line parsing, have a look at the argparse tutorial. The arg..."
 image: "https://docs.python.org/3.14/_images/social_previews/summary_library_argparse_3f064f33.png"
 language: "en"
-captured_at: "2026-05-07T21:23:20+08:00"
+captured_at: "2026-05-12T11:17:24+08:00"
 extraction_method: "trafilatura"
 word_count: 12594
 content_chars: 92287

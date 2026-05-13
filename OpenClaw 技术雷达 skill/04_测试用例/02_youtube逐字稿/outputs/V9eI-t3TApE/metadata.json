@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "source_type": "youtube_transcript",
+  "input": "https://www.youtube.com/watch?v=V9eI-t3TApE&t=1s",
+  "source_url": "https://www.youtube.com/watch?v=V9eI-t3TApE",
+  "video_id": "V9eI-t3TApE",
+  "language": "Chinese (Simplified)",
+  "track_language_code": "zh-Hans",
+  "is_generated": false,
+  "track_kind": "manual",
+  "captured_at": "2026-05-13T10:14:28+08:00",
+  "selection_reason": "first manual track without an initial translation marker",
+  "selection_confidence": "medium",
+  "speaker_detection": "heuristic",
+  "grouping_method": "sentence-and-time",
+  "speaker_markers_found": 0,
+  "generic_marker_count": 0,
+  "generic_marker_alternation_enabled": false,
+  "speakers": [],
+  "raw_segment_count": 6221,
+  "group_count": 413,
+  "content_chars": 77068,
+  "canonical_source": "transcript.md",
+  "files": [
+    "metadata.json",
+    "transcript.md",
+    "transcript.json",
+    "raw_transcript.txt",
+    "raw_transcript.json"
+  ],
+  "notes": [
+    "The main Markdown transcript is grouped heuristically for reading.",
+    "Speaker fields are inferred only from explicit subtitle text markers, not audio diarization.",
+    "raw_transcript.json preserves the original YouTube transcript snippets for evidence."
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "source_type": "paper_pdf",
+  "input": "https://arxiv.org/abs/2603.21687",
+  "source_url": "https://arxiv.org/abs/2603.21687",
+  "pdf_url": "https://arxiv.org/pdf/2603.21687",
+  "download": {
+    "method": "download",
+    "status_code": 200,
+    "content_type": "application/pdf",
+    "bytes": 8313335,
+    "final_url": "https://arxiv.org/pdf/2603.21687",
+    "final_url_sanitized": false
+  },
+  "title": "MIRAGE: The Illusion of Visual Understanding",
+  "authors": [
+    "Mohammad Asadi",
+    "Jack W. O'Sullivan",
+    "Fang Cao",
+    "Tahoura Nedaee",
+    "Kamyar Rajabalifardi",
+    "Fei-Fei Li",
+    "Ehsan Adeli",
+    "Euan Ashley"
+  ],
+  "arxiv_id": "2603.21687",
+  "version": null,
+  "published": "2026-03-23T08:18:09Z",
+  "arxiv_summary": "Multimodal AI systems have achieved remarkable performance across a broad range of real-world tasks, yet the mechanisms underlying visual-language reasoning remain surprisingly poorly understood. We report three findings that challenge prevailing assumptions about how these systems process and integrate visual information. First, Frontier models readily generate detailed image descriptions and elaborate reasoning traces, including pathology-biased clinical findings, for images never provided; we term this phenomenon mirage reasoning. Second, without any image input, models also attain strikingly high scores across general and medical multimodal benchmarks, bringing into question their utility and design. In the most extreme case, our model achieved the top rank on a standard chest X-ray question-answering benchmark without access to any images. Third, when models were explicitly instructed to guess answers without image access, rather than being implicitly prompted to assume images were present, performance declined markedly. Explicit guessing appears to engage a more conservative response regime, in contrast to the mirage regime in which models behave as though images have been provided. These findings expose fundamental vulnerabilities in how visual-language models reason and are evaluated, pointing to an urgent need for private benchmarks that eliminate textual cues enabling non-visual inference, particularly in medical contexts where miscalibrated AI carries the greatest consequence. We introduce B-Clean as a principled solution for fair, vision-grounded evaluation of multimodal AI systems.",
+  "captured_at": "2026-05-13T16:46:27+08:00",
+  "parser": "docling",
+  "parser_version": "2.93.0",
+  "page_count": 29,
+  "content_chars": 77591,
+  "content_sha256": "2ce02025a546b88a3a87d0727cc9122e0fad308df5dfa2710c822c4442d70531",
+  "source_pdf_sha256": "56fe2e64fd295dd0ab9eb820e0f89e701e180aa01795716104acbfca26f0b4dc",
+  "asset_count": 15,
+  "picture_count": 15,
+  "markdown_image_refs": 15,
+  "image_asset_mode": "referenced_assets",
+  "image_scale": 4.0,
+  "image_effective_dpi": 288,
+  "image_generation": {
+    "source": "docling_picture_items_and_pdf_crop_fallbacks",
+    "generate_page_images": false,
+    "generate_picture_images": true,
+    "generate_table_images": false,
+    "generate_figure_fallback_images": true
+  },
+  "figure_fallback_count": 7,
+  "figure_fallbacks": [
+    {
+      "page_no": 3,
+      "caption": "Figure 1: Definition and quantification of the mirage effect. a, We define a mirage as an AI model describing visual features in the absence of any image input. The output of a model affected by the mirage effect, seen in isolation, is indistinguishable from that of normal visual reasoning. They both describe seen images and visual features without showing any signs of uncertainty. b, We quantify the mirage effect in a multimodal AI model by measuring the frequency of the model showing the effect across all the questions in a given category. The questions are designed to ask specifically about an image input, common in that category, without providing any images. c, We show consistently high rates of showing the mirage effect across all the tested AI models. We observe that the average rate can be higher for the newest versions of one model compared to the legacy ones, suggesting that continued training and acquiring new skills can lead to unwanted behaviors in multimodal settings.",
+      "asset": "assets/figure_fallback_page_0003_1_scale_4.png",
+      "crop_bbox": {
+        "l": 66.73214721679688,
+        "t": 774.4114379882812,
+        "r": 527.8165283203125,
+        "b": 452.0335998535156
+      },
+      "noise_text_count": 102,
+      "removed_markdown_lines": 13,
+      "removed_image_refs": [
+        "image_000000_f31d44760f81300a7106088ccf1b4a723aa68a22407fffa0da1b2f6e79c5c137.png"
+      ]
+    },
+    {
+      "page_no": 4,
+      "caption": "Figure 2: The distribution of Gemini-3-Pro's answers in response to asking for the description and diagnosis based on non-existent images of a brain MRI, chest Xray, electrocardiogram, pathology slides, and user-taken skin pictures. Werepeat each question with 200 different seeds while keeping all the other parameters unchanged. Any cases of acknowledging the lack of an image, refusing to diagnose for safety reasons, or empty responses are mentioned together as 'No diagnosis found'. The diagnoses necessitating immediate followup actions are marked in red. We observe that although 'Normal' and 'No diagnosis found' cases are among the top mirage-based diagnoses, cumulatively, the pathologies are significantly more prevalent among the predictions.",
+      "asset": "assets/figure_fallback_page_0004_2_scale_4.png",
+      "crop_bbox": {
+        "l": 66.57225799560547,
+        "t": 518.4844970703125,
+        "r": 527.515869140625,
+        "b": 271.23809814453125
+      },
+      "noise_text_count": 74,
+      "removed_markdown_lines": 14,
+      "removed_image_refs": [
+        "image_000001_cab068f864db209d58e1d9274d4b4621d247ff1390c677b42f3f0d7ba762fe8b.png"
+      ]
+    },
+    {
+      "page_no": 7,
+      "caption": "Figure 3: The AI models' answers in the mirage-mode can exhibit illusory high accuracies in the benchmark-based evaluations. a, The 4 frontier AI models of Gemini-3-Pro, Gemini-2.5-Pro, Claude-Opus-4.5, and GPT-5.1 have been tested on 3 medical benchmarks of VQA-Rad, MicroVQA, and MedXpertQA-MM, and 3 general-purpose benchmarks of MMMUPro, Video-MMMU, and Video-MME in original mode, as well as in mirage-mode, i.e., asking the same visual question without providing the image and without acknowledging the lack of it. All models were tested in extended thinking mode, which yielded higher accuracy across all original and mirage-mode cases. We observe that the accuracies in mirage-mode not only do not collapse, but also are competitive with the original accuracies, especially on medical benchmarks. b, Our super-guesser, trained on the public set of ReXVQA, outperforms the top AI models, as well as the average of the radiology doctors on the held-out test-set. The base model used for the super-guesser is a 3-billion-parameter text-only Queen 2.5 model, released before the ReXVQA dataset, minimizing the possibility of data contamination. c, We define the Mirage score for a benchmark-model pair as the ratio of the model's accuracy on the benchmark in mirage-mode over the same model's original accuracy on the benchmark. We then calculate the Mirage score for a model as the average score over all the models tested, and for a benchmark as the average over all the models. The average Mirage score of a model demonstrates the model's dependence on the Mirage effect to answer multimodal benchmark questions. The average Mirage score of a benchmark shows the susceptibility of the benchmark to the mirage effect, i.e., the extent to which the benchmark's questions can be answered by the AI models without the visual input. 7",
+      "asset": "assets/figure_fallback_page_0007_3_scale_4.png",
+      "crop_bbox": {
+        "l": 66.9804916381836,
+        "t": 775.0796661376953,
+        "r": 524.9144897460938,
+        "b": 321.39752197265625
+      },
+      "noise_text_count": 73,
+      "removed_markdown_lines": 20,
+      "removed_image_refs": [
+        "image_000002_eccc605af1c4337a5352bf4b4fa4e3913737dff6cce16e9451c30ddad6910393.png"
+      ]
+    },
+    {
+      "page_no": 10,
+      "caption": "Figure 4: Performance of GPT-5.1 on the 3 benchmarks of MicroVQA, MedXpertQA-MM, and MMMU-Pro compared in mirage-mode and guessingmode. In guessing mode, the prompt acknowledges the lack of images and instructs the model to take the best guess based on the question. a, The accuracy decreases in all 3 of the benchmarks with awareness of the lacking image and instruction to guess. b, & c, The model in mirage-mode consistently outperforms or is comparable to the guess-mode in the medical benchmarks across all question categories. d, Mirage-mode shows a greater performance across 23 categories of MMMU-Pro, out-performed in just 5 by guess-mode, and equivalent in 2.",
+      "asset": "assets/figure_fallback_page_0010_4_scale_4.png",
+      "crop_bbox": {
+        "l": 67.12958526611328,
+        "t": 772.0783370783428,
+        "r": 527.0501098632812,
+        "b": 428.2622375488281
+      },
+      "noise_text_count": 100,
+      "removed_markdown_lines": 64,
+      "removed_image_refs": [
+        "image_000003_5b110efe8dd7c225cb18250ab398c0f76f3deddceab4620e37fca525089c974b.png"
+      ]
+    },
+    {
+      "page_no": 11,
+      "caption": "Figure 5: The B-Clean method helps evaluate multimodal AI models by identifying and removing all compromised questions using the mirage-mode evaluation, thereby leaving a clean version of the benchmark that exclusively evaluates visual understanding. a, We created the B-Clean versions of MMMU-Pro, MedXpertQA-MM, and MicroVQA datasets. During the cleaning, one half to three fourth of the benchmark questions were removed. b, We observe that not only do the accuracies decrease when moving from the full benchmarks to the cleaned versions, but also the rankings of the models change for 2 out of 3 models in 2 out of 3 benchmarks, and reduce the distance gaps in others.",
+      "asset": "assets/figure_fallback_page_0011_5_scale_4.png",
+      "crop_bbox": {
+        "l": 66.12397766113281,
+        "t": 495.34133444400953,
+        "r": 527.4269409179688,
+        "b": 271.21307373046875
+      },
+      "noise_text_count": 38,
+      "removed_markdown_lines": 17,
+      "removed_image_refs": [
+        "image_000004_270617f9feaae8c739cb36c69ca1377055a64375cdf76086313f68cbab36dbab.png"
+      ]
+    },
+    {
+      "page_no": 20,
+      "caption": "Figure S1: Merely adding common multimodal AI evaluation instructions, shown to improve the model performance in original (with-image) settings, substantially raises the mirage rates across all models.",
+      "asset": "assets/figure_fallback_page_0020_s1_scale_4.png",
+      "crop_bbox": {
+        "l": 70.72289276123047,
+        "t": 768.5261535644531,
+        "r": 524.5146484375,
+        "b": 458.42532693135735
+      },
+      "noise_text_count": 43,
+      "removed_markdown_lines": 9,
+      "removed_image_refs": [
+        "image_000005_706a0a2ec30dc3cba210076c2b4f560d110c8e9e00a225fe8f0a59c63d2004ea.png"
+      ]
+    },
+    {
+      "page_no": 21,
+      "caption": "Figure S2: The effect of explicitly mentioning multimodal attachments on mirage rates.",
+      "asset": "assets/figure_fallback_page_0021_s2_scale_4.png",
+      "crop_bbox": {
+        "l": 71.3958511352539,
+        "t": 771.4618688747104,
+        "r": 524.0703125,
+        "b": 458.42532693135735
+      },
+      "noise_text_count": 46,
+      "removed_markdown_lines": 13,
+      "removed_image_refs": [
+        "image_000006_0ceacd9bdc8986364c990d85a9779796181ad9ef2dae0f77bc432aec96f15ad1.png"
+      ]
+    }
+  ],
+  "pruned_unreferenced_assets": 7,
+  "ocr_mode": "disabled_by_default",
+  "warnings": [
+    "docling_ocr_disabled_for_born_digital_pdf",
+    "docling_picture_description_disabled_use_multimodal_followup",
+    "docling_formula_enrichment_disabled_math_may_be_plain_text",
+    "docling_chart_extraction_disabled_chart_data_may_be_caption_only",
+    "figure_text_soup_fallback_page_3:figure_fallback_page_0003_1_scale_4.png",
+    "figure_text_soup_fallback_page_4:figure_fallback_page_0004_2_scale_4.png",
+    "figure_text_soup_fallback_page_7:figure_fallback_page_0007_3_scale_4.png",
+    "figure_text_soup_fallback_page_10:figure_fallback_page_0010_4_scale_4.png",
+    "figure_text_soup_fallback_page_11:figure_fallback_page_0011_5_scale_4.png",
+    "figure_text_soup_fallback_page_20:figure_fallback_page_0020_s1_scale_4.png",
+    "figure_text_soup_fallback_page_21:figure_fallback_page_0021_s2_scale_4.png"
+  ],
+  "canonical_source": "paper.md",
+  "files": [
+    "metadata.json",
+    "paper.md",
+    "paper.json",
+    "source.pdf",
+    "assets/"
+  ],
+  "notes": [
+    "paper.md is the main reading source for downstream agents.",
+    "paper.json preserves Docling structured output for evidence lookup.",
+    "source.pdf is retained as the original evidence file."
+  ]
+}

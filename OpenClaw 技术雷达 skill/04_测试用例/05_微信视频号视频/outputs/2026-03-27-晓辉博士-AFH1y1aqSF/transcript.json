@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "source_type": "wechat_channels_video",
+  "source_url": "https://weixin.qq.com/sph/AFH1y1aqSF",
+  "preview_url": "https://channels.weixin.qq.com/finder-preview/pages/sph?id=AFH1y1aqSF",
+  "short_uri": "AFH1y1aqSF",
+  "author": "晓辉博士",
+  "title": "晓辉博士：在飞机上琢磨了研究场景的Agent Teams有哪些必要角色",
+  "published": "2026-03-27T23:24:42+08:00",
+  "captured_at": "2026-05-13T15:25:44+08:00",
+  "transcript_status": "asr_openrouter_completed",
+  "canonical_source": "video.md",
+  "file_role": "structured_transcript",
+  "asr": {
+    "engine": "openrouter",
+    "endpoint": "https://openrouter.ai/api/v1/audio/transcriptions",
+    "model": "openai/gpt-4o-mini-transcribe",
+    "language": "zh",
+    "audio_format": "mp3",
+    "chunk_seconds": 60,
+    "chunk_count": 6,
+    "temperature": 0.0,
+    "context_prompt_chars": 56,
+    "context_prompt": "专有名词：OpenClaw，Agent Teams，Anthropic，AI Research。请保留英文拼写。",
+    "canonical_terms": [
+      "OpenClaw",
+      "Agent",
+      "Teams",
+      "Anthropic",
+      "Research"
+    ],
+    "speaker_diarization_status": "not_available_openrouter_transcriptions",
+    "timestamp_status": "approximate_chunk_boundaries",
+    "usage": {
+      "total_tokens": 4727,
+      "input_tokens": 3295,
+      "output_tokens": 1432,
+      "cost": 0.01127875
+    },
+    "cost_usd": 0.01127875
+  },
+  "text": "哈喽,下飞机了,我最近不是入坑了Agent Teams吗,就是智能体小队的这个编排,然后对这个东西非常感兴趣,然后在飞机上呢,我一路反思,也想到就是作为这种研究场景的这种Agent Teams该如何设计,所以非常想跟大家分享一下,因为我们知道Anthropic它其实在Agent Teams的设计上是非常有一套的,而且在去年年底今年年初都发表了很多相关的文章博客,但是我发现他们有一个问题,就是他们其实是面向一些确定性的编程场景的multi-agent协作,那它里面有几个特征哈,比如说像它需要一个明确的架构,就是要有一个PM负责组织整个的Agent来去做研发,那下面有一些执行的Agent,然后需要设立一些特别明确的验证机制,就是到底什么方向你做对了,对,我是该怎么去激励你,对,这个是非常明确的,还有就是我需要这些执行的Agent之间,它不需要有太多的讨论,它执行就好了,所以在这\n\n这个场景下他们会倾向于用一个非常聪明的模型,比如说Open4.6,它作为大脑,就是做规划,做决策,做指导,那底下呢用Haiku,就是它比较快的去执行的这样的一些agent做执行,所以在他们写C编译器的这个实践中,他们就用这样的一套方式来去进行协作,所以这个也是大部分的软件开发工程中用multi-agent的一种方式。当然可能有不同的环节哈,比如说开发测试,对吧,然后包括这里面也会有一些对抗去挑战已有的一些成果。但是我觉得研究场景是非常不一样的,因为我上次分享那也是我第一次觉得非常的惊艳哈,用multi-agent做研究。后来我这两天也先后做了好几个这种multi-agent的研究,我也总结出来了一些规律,因为像这种研究场景,不确定性的这种场景和这种做执行的写代码的场景还是非常不一样的。所以我也发现了几点有助于大家去提高multi-agent在研究场景应用的一些方式。那这两点\n\n这种类型的毛题agent它有一些地方是一致的,比如说它需要通过文件交互,让agent把它的发现要写到文件里面,下一个agent是可以读取的。那比如说像它需要层级,必须有一个PM去控制整个研究的进度,那也需要有审核机制,对吧,你的标准是什么?这些都是一致的,那不一致的是什么呢?就是我觉得在研究型的这个agent team中,它需要有一个非常强有力的批判者,就是我们做研究,你需要有批判性思维,需要站在第一性原理的角度去持续的反思已有的这些假设是不是对的,所以就在执行者,就是这些负责不同方向的,比如有的负责硬件,负责软件,负责应用研究,它每个prompt是不一样的,它的这个专家在做完研究之后,要有一个批判者去批判他们的研究,去质疑他们是不是应该做这件事,或者是他们做的方法对不对?那这是一个非常不一样的点,因为我发现我的那个研究结果有批判者,它的效果是非常好的,因为我让AI去反思到底那\n\n这些agent的设计是必要的,他觉得这个批判的批判角色是非常非常必要的,因为它会给你完全不一样的视角,因为一般的agent会倾向于自圆其说,但是有了批判的视角就有一种对抗,对,我觉得这个是一个非常关键的点。再有一个呢,就是你要在这个把agent team里面设定一个探索者,就是这个探索者呢,他不是在已有的圈圈里打转,比如说我已经看到了这么多文献,那是不是这些文献就可以给我足够的信心?不一定的,因为研究是个开放性的事情,所以他要去再去找其他的新的视角,然后找过来以后再去补充到现有的研究中,所以要有这么一个探索者,其实这也是为什么在一些团队中会预留20%的探索时间,让你去尝试很多新的机会,这个是做创新必要的一个条件,所以在这个过程中引入探索者也是非常必要的。然后第三个呢,就是在编程场景,其实它不需要multi-agent之间很多的通讯,它可能就是告诉下一个agent我做完了,你看一看,他们其实是避免讨论的,因为如果过多\n\n讨论会导致非常乱,引入了很多噪声,因为它是确定性的场景,我不需要你讨论,你执行就完了。它特别像是工业时代的那种agent,但是来到了一个AI时代,或者说一个不确定的时代,你面对一个不确定性的问题,这些agent之间是需要讨论的,因为他们之间是有学科的gap,或者说他们之间是通过讨论能够不断启发出一些新的思考。所以他们之间的通信就变得非常非常的重要。所以这也是我认为目前的agent在研究场景,在一些不确定性场景的设计中需要考虑的几个要素,比如说一个PM,聪明的大脑,那一些执行的,就是不同方向的执行专家,就是他擅长不同领域,他的prompt是不一样的。第三个就是批判者,去挑战他们的,不断去挑战。第四个就是探索者,去在前沿上可以有更多的展开和延伸的探索。然后第五,最后一个可能就是做一些总结类的工作。那所以就是这几个要素是非常非常重要的。\n\n最重要的可能还是你这个方向要去哪儿,你为什么要做这个研究,然后你做的这个研究有什么价值,这些是要人来去补充的。所以这个是今天跟大家的一个分享,就是关于我对这个multi-agent的一个理解。我看看接下来能不能把这个东西做成一个skill,下一周我一定去上传到github,把我之前说的记忆系统,multi-agent协作,对,等等吧,一些我能想到的,对大家有帮助的,我去上传到我的github上。祝大家周末愉快,拜拜。",
+  "segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 60,
+      "start_label": "00:00:00",
+      "end_label": "00:01:00",
+      "speaker": null,
+      "speaker_confidence": "not_detected",
+      "text": "哈喽,下飞机了,我最近不是入坑了Agent Teams吗,就是智能体小队的这个编排,然后对这个东西非常感兴趣,然后在飞机上呢,我一路反思,也想到就是作为这种研究场景的这种Agent Teams该如何设计,所以非常想跟大家分享一下,因为我们知道Anthropic它其实在Agent Teams的设计上是非常有一套的,而且在去年年底今年年初都发表了很多相关的文章博客,但是我发现他们有一个问题,就是他们其实是面向一些确定性的编程场景的multi-agent协作,那它里面有几个特征哈,比如说像它需要一个明确的架构,就是要有一个PM负责组织整个的Agent来去做研发,那下面有一些执行的Agent,然后需要设立一些特别明确的验证机制,就是到底什么方向你做对了,对,我是该怎么去激励你,对,这个是非常明确的,还有就是我需要这些执行的Agent之间,它不需要有太多的讨论,它执行就好了,所以在这",
+      "source": "openrouter_asr",
+      "asr_model": "openai/gpt-4o-mini-transcribe",
+      "audio_file": "assets/audio/chunk_0000.mp3",
+      "usage": {
+        "total_tokens": 847,
+        "input_tokens": 602,
+        "output_tokens": 245,
+        "cost": 0.0019775
+      }
+    },
+    {
+      "index": 1,
+      "start": 60,
+      "end": 120,
+      "start_label": "00:01:00",
+      "end_label": "00:02:00",
+      "speaker": null,
+      "speaker_confidence": "not_detected",
+      "text": "这个场景下他们会倾向于用一个非常聪明的模型,比如说Open4.6,它作为大脑,就是做规划,做决策,做指导,那底下呢用Haiku,就是它比较快的去执行的这样的一些agent做执行,所以在他们写C编译器的这个实践中,他们就用这样的一套方式来去进行协作,所以这个也是大部分的软件开发工程中用multi-agent的一种方式。当然可能有不同的环节哈,比如说开发测试,对吧,然后包括这里面也会有一些对抗去挑战已有的一些成果。但是我觉得研究场景是非常不一样的,因为我上次分享那也是我第一次觉得非常的惊艳哈,用multi-agent做研究。后来我这两天也先后做了好几个这种multi-agent的研究,我也总结出来了一些规律,因为像这种研究场景,不确定性的这种场景和这种做执行的写代码的场景还是非常不一样的。所以我也发现了几点有助于大家去提高multi-agent在研究场景应用的一些方式。那这两点",
+      "source": "openrouter_asr",
+      "asr_model": "openai/gpt-4o-mini-transcribe",
+      "audio_file": "assets/audio/chunk_0001.mp3",
+      "usage": {
+        "total_tokens": 856,
+        "input_tokens": 602,
+        "output_tokens": 254,
+        "cost": 0.0020225
+      }
+    },
+    {
+      "index": 2,
+      "start": 120,
+      "end": 180,
+      "start_label": "00:02:00",
+      "end_label": "00:03:00",
+      "speaker": null,
+      "speaker_confidence": "not_detected",
+      "text": "这种类型的毛题agent它有一些地方是一致的,比如说它需要通过文件交互,让agent把它的发现要写到文件里面,下一个agent是可以读取的。那比如说像它需要层级,必须有一个PM去控制整个研究的进度,那也需要有审核机制,对吧,你的标准是什么?这些都是一致的,那不一致的是什么呢?就是我觉得在研究型的这个agent team中,它需要有一个非常强有力的批判者,就是我们做研究,你需要有批判性思维,需要站在第一性原理的角度去持续的反思已有的这些假设是不是对的,所以就在执行者,就是这些负责不同方向的,比如有的负责硬件,负责软件,负责应用研究,它每个prompt是不一样的,它的这个专家在做完研究之后,要有一个批判者去批判他们的研究,去质疑他们是不是应该做这件事,或者是他们做的方法对不对?那这是一个非常不一样的点,因为我发现我的那个研究结果有批判者,它的效果是非常好的,因为我让AI去反思到底那",
+      "source": "openrouter_asr",
+      "asr_model": "openai/gpt-4o-mini-transcribe",
+      "audio_file": "assets/audio/chunk_0002.mp3",
+      "usage": {
+        "total_tokens": 871,
+        "input_tokens": 602,
+        "output_tokens": 269,
+        "cost": 0.0020975
+      }
+    },
+    {
+      "index": 3,
+      "start": 180,
+      "end": 240,
+      "start_label": "00:03:00",
+      "end_label": "00:04:00",
+      "speaker": null,
+      "speaker_confidence": "not_detected",
+      "text": "这些agent的设计是必要的,他觉得这个批判的批判角色是非常非常必要的,因为它会给你完全不一样的视角,因为一般的agent会倾向于自圆其说,但是有了批判的视角就有一种对抗,对,我觉得这个是一个非常关键的点。再有一个呢,就是你要在这个把agent team里面设定一个探索者,就是这个探索者呢,他不是在已有的圈圈里打转,比如说我已经看到了这么多文献,那是不是这些文献就可以给我足够的信心?不一定的,因为研究是个开放性的事情,所以他要去再去找其他的新的视角,然后找过来以后再去补充到现有的研究中,所以要有这么一个探索者,其实这也是为什么在一些团队中会预留20%的探索时间,让你去尝试很多新的机会,这个是做创新必要的一个条件,所以在这个过程中引入探索者也是非常必要的。然后第三个呢,就是在编程场景,其实它不需要multi-agent之间很多的通讯,它可能就是告诉下一个agent我做完了,你看一看,他们其实是避免讨论的,因为如果过多",
+      "source": "openrouter_asr",
+      "asr_model": "openai/gpt-4o-mini-transcribe",
+      "audio_file": "assets/audio/chunk_0003.mp3",
+      "usage": {
+        "total_tokens": 888,
+        "input_tokens": 602,
+        "output_tokens": 286,
+        "cost": 0.0021825
+      }
+    },
+    {
+      "index": 4,
+      "start": 240,
+      "end": 300,
+      "start_label": "00:04:00",
+      "end_label": "00:05:00",
+      "speaker": null,
+      "speaker_confidence": "not_detected",
+      "text": "讨论会导致非常乱,引入了很多噪声,因为它是确定性的场景,我不需要你讨论,你执行就完了。它特别像是工业时代的那种agent,但是来到了一个AI时代,或者说一个不确定的时代,你面对一个不确定性的问题,这些agent之间是需要讨论的,因为他们之间是有学科的gap,或者说他们之间是通过讨论能够不断启发出一些新的思考。所以他们之间的通信就变得非常非常的重要。所以这也是我认为目前的agent在研究场景,在一些不确定性场景的设计中需要考虑的几个要素,比如说一个PM,聪明的大脑,那一些执行的,就是不同方向的执行专家,就是他擅长不同领域,他的prompt是不一样的。第三个就是批判者,去挑战他们的,不断去挑战。第四个就是探索者,去在前沿上可以有更多的展开和延伸的探索。然后第五,最后一个可能就是做一些总结类的工作。那所以就是这几个要素是非常非常重要的。",
+      "source": "openrouter_asr",
+      "asr_model": "openai/gpt-4o-mini-transcribe",
+      "audio_file": "assets/audio/chunk_0004.mp3",
+      "usage": {
+        "total_tokens": 848,
+        "input_tokens": 602,
+        "output_tokens": 246,
+        "cost": 0.0019825
+      }
+    },
+    {
+      "index": 5,
+      "start": 300,
+      "end": 360,
+      "start_label": "00:05:00",
+      "end_label": "00:06:00",
+      "speaker": null,
+      "speaker_confidence": "not_detected",
+      "text": "最重要的可能还是你这个方向要去哪儿,你为什么要做这个研究,然后你做的这个研究有什么价值,这些是要人来去补充的。所以这个是今天跟大家的一个分享,就是关于我对这个multi-agent的一个理解。我看看接下来能不能把这个东西做成一个skill,下一周我一定去上传到github,把我之前说的记忆系统,multi-agent协作,对,等等吧,一些我能想到的,对大家有帮助的,我去上传到我的github上。祝大家周末愉快,拜拜。",
+      "source": "openrouter_asr",
+      "asr_model": "openai/gpt-4o-mini-transcribe",
+      "audio_file": "assets/audio/chunk_0005.mp3",
+      "usage": {
+        "total_tokens": 417,
+        "input_tokens": 285,
+        "output_tokens": 132,
+        "cost": 0.00101625
+      }
+    }
+  ],
+  "warnings": [
+    "OpenRouter transcription API returned text only; speaker diarization is not available in this ASR path"
+  ]
+}

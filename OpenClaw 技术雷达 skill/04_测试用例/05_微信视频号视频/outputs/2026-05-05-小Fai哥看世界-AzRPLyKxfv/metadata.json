@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "source_type": "wechat_channels_video",
+  "input": "https://weixin.qq.com/sph/AzRPLyKxfv",
+  "source_url": "https://weixin.qq.com/sph/AzRPLyKxfv",
+  "preview_url": "https://channels.weixin.qq.com/finder-preview/pages/sph?id=AzRPLyKxfv",
+  "short_uri": "AzRPLyKxfv",
+  "api_url": "https://channels.weixin.qq.com/finder-preview/api/feed/get_feed_info",
+  "title": "小Fai哥看世界：红杉资本：认知革命奇点到来——有关AI未来的4个故事",
+  "author": "小Fai哥看世界",
+  "published": "2026-05-05T08:30:00+08:00",
+  "captured_at": "2026-05-13T15:27:22+08:00",
+  "fetch_method": "public-finder-preview-api",
+  "parser": "wechat_channels_sph_preview",
+  "transcript_status": "asr_openrouter_completed",
+  "asr": {
+    "engine": "openrouter",
+    "endpoint": "https://openrouter.ai/api/v1/audio/transcriptions",
+    "model": "openai/gpt-4o-mini-transcribe",
+    "language": "zh",
+    "audio_format": "mp3",
+    "chunk_seconds": 60,
+    "chunk_count": 9,
+    "temperature": 0.0,
+    "context_prompt_chars": 78,
+    "context_prompt": "专有名词：OpenClaw，红杉资本，Sequoia Capital，认知革命，AI，AGI，Agent，OpenAI，Anthropic。请保留英文拼写。",
+    "canonical_terms": [
+      "OpenClaw",
+      "Sequoia",
+      "Capital",
+      "AGI",
+      "Agent",
+      "OpenAI",
+      "Anthropic"
+    ],
+    "speaker_diarization_status": "not_available_openrouter_transcriptions",
+    "timestamp_status": "approximate_chunk_boundaries",
+    "usage": {
+      "total_tokens": 6931,
+      "input_tokens": 5156,
+      "output_tokens": 1775,
+      "cost": 0.01532
+    },
+    "cost_usd": 0.01532
+  },
+  "speaker_diarization_status": "not_available_openrouter_transcriptions",
+  "video_url_publicly_exposed": false,
+  "public_video_url_count": 0,
+  "manual_transcript": null,
+  "source_media": "source_media.mp4",
+  "source_media_metadata": {
+    "filename": "source_media.mp4",
+    "size_bytes": 13757641,
+    "sha256": "f5c94a7b4f741fe9499975454537c2d26c746bc7b5d772f6b6d3d7dcc5810a6f",
+    "mime_type": "video/mp4",
+    "acquisition_method": "provided_local_media"
+  },
+  "cover_asset": "assets/cover.jpg",
+  "asset_count": 3,
+  "content_chars": 9855,
+  "transcript_chars": 8388,
+  "content_sha256": "d3e7aa46663fd1ccdc8620ceda2ce387a8ace5e49f676dec7ee9a13af4fbd344",
+  "counts": {
+    "favorite": "3005",
+    "forward": "1.0万",
+    "like": "2204",
+    "comment": "104"
+  },
+  "scene_info": {
+    "dynamicExportId": "export/UzFfBgAAxJWhdFQBR2uYjczT4DCsIticCQAsBJrgFy400Sep9Tm2opPPcw",
+    "commentScene": 39,
+    "expiredTime": 1778664441,
+    "requestScene": 0,
+    "entryScene": 64,
+    "entryCardType": 48
+  },
+  "err_msg": {
+    "type": 0
+  },
+  "canonical_source": "video.md",
+  "agent_reading_order": [
+    "metadata.json",
+    "video.md",
+    "transcript.json",
+    "feed.json"
+  ],
+  "file_roles": {
+    "metadata.json": "archive_index_status_and_quality_control",
+    "video.md": "canonical_reading_file",
+    "transcript.json": "structured_transcript_status_segments_and_asr_metadata",
+    "feed.json": "wechat_preview_api_source_snapshot",
+    "assets/": "localized_cover_avatar_auth_icon_and_asr_audio_chunks",
+    "source_media.mp4": "source_media_evidence"
+  },
+  "files": [
+    "metadata.json",
+    "video.md",
+    "transcript.json",
+    "feed.json",
+    "assets/",
+    "assets/cover.jpg",
+    "assets/avatar.jpg",
+    "assets/auth_icon.png",
+    "source_media.mp4",
+    "assets/audio/chunk_0000.mp3",
+    "assets/audio/chunk_0001.mp3",
+    "assets/audio/chunk_0002.mp3",
+    "assets/audio/chunk_0003.mp3",
+    "assets/audio/chunk_0004.mp3",
+    "assets/audio/chunk_0005.mp3",
+    "assets/audio/chunk_0006.mp3",
+    "assets/audio/chunk_0007.mp3",
+    "assets/audio/chunk_0008.mp3"
+  ],
+  "warnings": [
+    "OpenRouter transcription API returned text only; speaker diarization is not available in this ASR path"
+  ],
+  "notes": [
+    "metadata.json is the agent entrypoint for status, warnings, file roles, and reading order.",
+    "video.md is the only canonical reading file for WeChat Channels sph archives.",
+    "transcript.json preserves transcript status, text, segments, ASR details, and speaker degradation.",
+    "feed.json preserves the raw public preview API response for evidence."
+  ]
+}

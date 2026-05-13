@@ -1,0 +1,33 @@
+{
+  "data": {
+    "authorInfo": {
+      "nickname": "晓辉博士",
+      "headImgUrl": "https://wx.qlogo.cn/finderhead/ver_1/MXGE5k2O5XZ8UiaoS2ichf5KrDtwfMyGqIbtDur1iavCWgM6YTvjBIa4oiaibCL1sEOsP2JvfmJsvESPApYPuCQJvyts74F1XOkNkVX559HeyhoEPvEaI2kkLCaMibZxv8zzF1DcYpnWIXGFGjyRhMgRGfUA/0",
+      "authIconUrl": "https://dldir1v6.qq.com/weixin/checkresupdate/auth_icon_level3_2e2f94615c1e4651a25a7e0446f63135.png"
+    },
+    "feedInfo": {
+      "picInfo": [],
+      "description": "在飞机上琢磨了研究场景的Agent Teams有哪些必要角色，下了飞机迅速查了下Anthropic的设计哲学，发现他们讲的是面向编程场景的Agent Teams的编排，跟我讲的研究场景还是有很大区别的，尽快分享一下，跟有需要做研究的朋友们分享下。#AgentTeams #Agent #智能体编排 #Anthropic #AI",
+      "favCountFmt": "1167",
+      "likeCountFmt": "469",
+      "forwardCountFmt": "1632",
+      "commentCountFmt": "92",
+      "createtime": 1774625082,
+      "isHardAd": false,
+      "coverUrl": "https://finder.video.qq.com/251/20304/stodownload?encfilekey=oibeqyX228riaCwo9STVsGLIBn9G5YG8Zn3FBalrCPJW1lMMQTeEKliaHLBzEyict9vQ66k3S94OWyKa1kEicBGKEftic73tkGNNRMkiaBPcpxZ3oNDG37CicftSicljAq3Uvk4Cn87plDZ27Qhg&token=2lt8WBSnjTkzOs5q0iadQbj9OK7flNVYy5xibJLNoVZ5lId0XaYTib9P0CE9vx8BODoCptv3pkc1RvVrcib7g3U7nHeaTbEpia03QOB1DWvW0B1QH94icbtZtvRHz29Fgeh4hxeJjVXstrp7IY0B3PaMat3fibx70uSTaSaJ8nyeTKZaY5GKLEOK5ayTMRhItBzRAHwO94fjELEiaFIKChIn5EYniaxBldXd8avun&hy=SZ&idx=1&m=ad0d33457bda79906cd5ca1fdc51c19a&uzid=1&wxampicformat=503&picformat=200"
+    },
+    "errMsg": {
+      "type": 0
+    },
+    "sceneInfo": {
+      "dynamicExportId": "export/UzFfBgAAxN2icAd0MCaujczT4DCsIseTCQAsqkV4X3zbM_v1QScLrIMeJw",
+      "commentScene": 39,
+      "expiredTime": 1778664550,
+      "requestScene": 0,
+      "entryScene": 64,
+      "entryCardType": 48
+    }
+  },
+  "errCode": 0,
+  "errMsg": ""
+}

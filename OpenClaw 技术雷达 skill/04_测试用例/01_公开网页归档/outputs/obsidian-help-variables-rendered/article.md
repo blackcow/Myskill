@@ -10,7 +10,7 @@ published: ""
 description: "Variables - Obsidian Help"
 image: ""
 language: "en"
-captured_at: "2026-05-07T21:23:52+08:00"
+captured_at: "2026-05-12T11:18:20+08:00"
 extraction_method: "dom-rendered"
 word_count: 1378
 content_chars: 9318

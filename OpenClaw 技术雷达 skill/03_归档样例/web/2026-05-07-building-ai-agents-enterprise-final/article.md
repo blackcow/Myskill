@@ -2,28 +2,55 @@
 source_type: "public_web_page"
 source_url: "https://claude.com/blog/building-ai-agents-for-the-enterprise"
 final_url: "https://claude.com/blog/building-ai-agents-for-the-enterprise"
+canonical_url: "https://claude.com/blog/building-ai-agents-for-the-enterprise"
 title: "Building AI agents for the enterprise | Claude"
 site: "Claude"
 author: ""
-published: "2026-04-30"
-captured_at: "2026-05-07T20:43:53+08:00"
-extraction_method: "trafilatura"
-asset_count: 0
+published: "Apr 30, 2026"
+description: "In this guide, we share how leading organizations are using agents to transform their work today, and how Claude Cowork brings these capabilities to every team."
+image: "https://cdn.prod.website-files.com/68a44d4040f98a4adf2207b6/69f3cf6a2e9d9a8377b089fc_og_building-ai-agents-for-the-enterprise.jpg"
+language: "en-US"
+captured_at: "2026-05-12T11:20:14+08:00"
+extraction_method: "dom-expanded"
+word_count: 401
+content_chars: 2648
+content_sha256: "75e20d60cbc7d45d2b98f6f72f7de084ddc04aa636520ca69360e5ce92e75726"
+asset_count: 1
 status: "raw"
 ---
 
 # Building AI agents for the enterprise | Claude
 
+Explore here
+
+![1000x1000](assets/image-01.jpg)
+
+# Building AI agents for the enterprise
+
 In this guide, we share how leading organizations are using agents to transform their work today, and how Claude Cowork brings these capabilities to every team.
 
-- Date: April 30, 2026
-- Reading time: 5min
+- Category
 
-Our September 2025 Anthropic Economic Index found that in the U.S., 40 percent of employees report using AI at work, up from 20 percent in 2023. While these are significant gains, a looming question remains: will AI produce lasting advantages or incremental gains that plateau within a quarter?
+[Agents](https://claude.com/blog/category/agents)
+- Product
+
+Claude Cowork
+- Date
+
+April 30, 2026
+- Reading time
+
+5
+
+min
+
+https://claude.com/blog/building-ai-agents-for-the-enterprise
+
+Our September 2025 [Anthropic Economic Index](https://www.anthropic.com/research/anthropic-economic-index-september-2025-report) found that in the U.S., 40 percent of employees report using AI at work, up from 20 percent in 2023. While these are significant gains, a looming question remains: will AI produce lasting advantages or incremental gains that plateau within a quarter?
 
 The enterprises pulling ahead are doing something different. They're embedding agentic AI into how employees work, how processes run, and what products are possible. They're encoding institutional knowledge into systems that compound over time, and they're seeing returns that are difficult for competitors to replicate.
 
-To help leaders chart this path, we put together a guide on the three pillars of enterprise AI transformation, with examples from organizations doing this work today: L'Oreal, Lyft, and Rakuten. The guide also covers how to bring these capabilities to every team in your organization with Claude Cowork, without requiring a custom build for each one.
+To help leaders chart this path, we put together a guide on the three pillars of enterprise AI transformation, with examples from organizations doing this work today: L'Oreal, Lyft, and Rakuten. The guide also covers how to bring these capabilities to every team in your organization with [Claude Cowork](https://www.anthropic.com/product/claude-cowork), without requiring a custom build for each one.
 
 In this guide, we share:
 
@@ -36,4 +63,16 @@ In this guide, we share:
 
 The companies getting the biggest returns from AI are being deliberate about how they teach it to employees, where they apply it, and what they build next.
 
-**Check it out, here.**
+**Check it out,** [**here**](https://cdn.prod.website-files.com/6889473510b50328dbb70ae6/69f3af1f0b8ebe5cde42fcda_Claude-Building-AI-Agents-in-the-Enterpise-04302026_v2%20(1).pdf)**.**
+
+[Get started](https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork) with Claude Cowork today.
+
+‍
+
+No items found.
+
+[Prev](#)Prev
+
+0/5
+
+[Next](#)Next

@@ -754,8 +754,8 @@ def frontmatter(
     body_word_count: int,
     content_chars: int,
     content_hash: str,
+    captured_at: str,
 ) -> str:
-    captured_at = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
     fields: list[tuple[str, str | int | bool]] = [
         ("source_type", "public_web_page"),
         ("source_url", page.source_url),
@@ -883,51 +883,50 @@ def write_archive(
     body = body.strip()
     body_word_count = count_words(body)
     content_hash = hashlib.sha256(body.encode("utf-8")).hexdigest()
+    captured_at = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
+    warnings = page.warnings + image_warnings
     article = (
-        f"{frontmatter(page, asset_count, body_word_count, len(body), content_hash)}"
+        f"{frontmatter(page, asset_count, body_word_count, len(body), content_hash, captured_at)}"
         f"\n\n# {page.title}\n\n{body}\n"
     )
     (out_dir / "article.md").write_text(article, encoding="utf-8")
 
-    readme_lines = [
-        f"# {page.title}",
-        "",
-        f"source: {page.source_url}",
-        f"final_url: {page.final_url}",
-        f"canonical_url: {page.canonical_url}",
-        f"site: {page.site}",
-        f"author: {page.author}",
-        f"published: {page.published}",
-        f"language: {page.language}",
-        f"extraction_method: {page.method}",
-        f"word_count: {body_word_count}",
-        f"content_chars: {len(body)}",
-        f"content_sha256: {content_hash}",
-        f"download_images: {str(download_images).lower()}",
-        f"asset_count: {asset_count}",
-        "",
-        "canonical_source: article.md",
-        "",
-        "Agent reading order:",
-        "1. README.md for metadata and warnings.",
-        "2. article.md for the readable article body.",
-        "3. assets/ only when local images are needed.",
-        "",
-        "Directory contract:",
-        "- README.md",
-        "- article.md",
-        "- assets/",
-        "",
-        "Notes:",
-        "- This archive is for public ordinary web pages.",
-        "- It does not bypass login, paywalls, captcha, or access controls.",
-        "- Images are downloaded only when --download-images is used.",
-    ]
-    warnings = page.warnings + image_warnings
-    if warnings:
-        readme_lines.extend(["", "Warnings:"])
-        readme_lines.extend(f"- {warning}" for warning in warnings)
-    (out_dir / "README.md").write_text("\n".join(readme_lines) + "\n", encoding="utf-8")
+    metadata = {
+        "schema_version": 1,
+        "source_type": "public_web_page",
+        "source_url": page.source_url,
+        "final_url": page.final_url,
+        "canonical_url": page.canonical_url,
+        "title": page.title,
+        "site": page.site,
+        "author": page.author,
+        "published": page.published,
+        "description": page.description,
+        "image": page.image,
+        "language": page.language,
+        "captured_at": captured_at,
+        "extraction_method": page.method,
+        "word_count": body_word_count,
+        "content_chars": len(body),
+        "content_sha256": content_hash,
+        "download_images": download_images,
+        "asset_count": asset_count,
+        "warnings": warnings,
+        "canonical_source": "article.md",
+        "files": ["metadata.json", "article.md", "assets/"],
+        "notes": [
+            "This archive is for public ordinary web pages.",
+            "It does not bypass login, paywalls, captcha, or access controls.",
+            "Images are downloaded only when --download-images is used.",
+        ],
+    }
+    (out_dir / "metadata.json").write_text(
+        json.dumps(metadata, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    old_readme = out_dir / "README.md"
+    if old_readme.exists():
+        old_readme.unlink()
 
     return {
         "OutDir": str(out_dir),
@@ -945,7 +944,7 @@ def write_archive(
         "ContentSha256": content_hash,
         "AssetCount": asset_count,
         "Warnings": warnings,
-        "Files": ["README.md", "article.md", "assets/"],
+        "Files": ["metadata.json", "article.md", "assets/"],
     }
 
 

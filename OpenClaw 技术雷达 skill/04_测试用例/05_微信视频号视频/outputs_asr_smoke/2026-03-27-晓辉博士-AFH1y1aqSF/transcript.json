@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "source_type": "wechat_channels_video",
+  "source_url": "https://weixin.qq.com/sph/AFH1y1aqSF",
+  "preview_url": "https://channels.weixin.qq.com/finder-preview/pages/sph?id=AFH1y1aqSF",
+  "short_uri": "AFH1y1aqSF",
+  "author": "晓辉博士",
+  "title": "晓辉博士：在飞机上琢磨了研究场景的Agent Teams有哪些必要角色",
+  "published": "2026-03-27T23:24:42+08:00",
+  "captured_at": "2026-05-13T15:29:12+08:00",
+  "transcript_status": "asr_openrouter_completed",
+  "canonical_source": "video.md",
+  "file_role": "structured_transcript",
+  "asr": {
+    "engine": "openrouter",
+    "endpoint": "https://openrouter.ai/api/v1/audio/transcriptions",
+    "model": "openai/gpt-4o-mini-transcribe",
+    "language": "zh",
+    "audio_format": "mp3",
+    "chunk_seconds": 30,
+    "chunk_count": 1,
+    "temperature": 0.0,
+    "context_prompt_chars": 44,
+    "context_prompt": "专有名词：OpenClaw，微信视频号，归档转写。请保留 OpenClaw 的英文拼写。",
+    "canonical_terms": [
+      "OpenClaw"
+    ],
+    "speaker_diarization_status": "not_available_openrouter_transcriptions",
+    "timestamp_status": "approximate_chunk_boundaries",
+    "usage": {
+      "total_tokens": 91,
+      "input_tokens": 70,
+      "output_tokens": 21,
+      "cost": 0.0001925
+    },
+    "cost_usd": 0.0001925
+  },
+  "text": "你好,OpenClaw,这是一段微信视频号归档转写测试。",
+  "segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 30,
+      "start_label": "00:00:00",
+      "end_label": "00:00:30",
+      "speaker": null,
+      "speaker_confidence": "not_detected",
+      "text": "你好,OpenClaw,这是一段微信视频号归档转写测试。",
+      "source": "openrouter_asr",
+      "asr_model": "openai/gpt-4o-mini-transcribe",
+      "audio_file": "assets/audio/chunk_0000.mp3",
+      "usage": {
+        "total_tokens": 91,
+        "input_tokens": 70,
+        "output_tokens": 21,
+        "cost": 0.0001925
+      }
+    }
+  ],
+  "warnings": [
+    "OpenRouter transcription API returned text only; speaker diarization is not available in this ASR path"
+  ]
+}

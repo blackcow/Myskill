@@ -59,7 +59,7 @@ Tech Radar Skill
   -> 定义判断流程、分级规则、卡片格式、资产沉淀协议
 
 Source Tools
-  -> 抓取和解析微信公众号、公开网页、X / Twitter、arXiv、GitHub、YouTube transcript
+  -> 抓取和解析公开网页、微信公众号、微信视频号、YouTube transcript、论文 PDF / arXiv、X / Twitter、GitHub
 
 Asset Wiki / Repo
   -> 保存 raw source、radar cards、认知资产、index、log
@@ -97,9 +97,17 @@ OpenClaw 技术雷达 skill/
 │   ├── 02_微信公众号文章最小归档方案/
 │   │   ├── README.md
 │   │   └── archive-wechat-article-minimal.ps1
-│   └── 03_youtube逐字稿原始字幕方案/
+│   ├── 03_youtube逐字稿原始字幕方案/
+│   │   ├── README.md
+│   │   ├── fetch_original_transcript.py
+│   │   └── requirements.txt
+│   ├── 04_论文PDF归档方案/
+│   │   ├── README.md
+│   │   ├── archive_paper_pdf.py
+│   │   └── requirements.txt
+│   └── 05_微信视频号视频归档方案/
 │       ├── README.md
-│       ├── fetch_original_transcript.py
+│       ├── archive_wechat_channel_video.py
 │       └── requirements.txt
 ├── 03_归档样例/
 │   └── web/
@@ -107,7 +115,9 @@ OpenClaw 技术雷达 skill/
     ├── README.md
     ├── 01_公开网页归档/
     ├── 02_youtube逐字稿/
-    └── 03_微信公众号文章/
+    ├── 03_微信公众号文章/
+    ├── 04_论文PDF归档/
+    └── 05_微信视频号视频/
 ```
 
 ## 当前可运行方案
@@ -115,6 +125,8 @@ OpenClaw 技术雷达 skill/
 - [公开网页 Markdown 归档方案](02_采集与归档方案/01_公开网页Markdown归档方案/README.md)
 - [微信公众号文章最小归档方案](02_采集与归档方案/02_微信公众号文章最小归档方案/README.md)
 - [YouTube 逐字稿原始字幕抓取方案](02_采集与归档方案/03_youtube逐字稿原始字幕方案/README.md)
+- [论文 PDF 归档方案](02_采集与归档方案/04_论文PDF归档方案/README.md)
+- [微信视频号视频归档方案](02_采集与归档方案/05_微信视频号视频归档方案/README.md)
 
 ## 测试用例位置
 
@@ -122,7 +134,9 @@ OpenClaw 技术雷达 skill/
 
 - `01_公开网页归档`：公开网页、规范文档、JS 渲染网页、图片下载用例。
 - `02_youtube逐字稿`：YouTube 原始字幕、自动字幕、启发式 speaker 分组用例。
-- `03_微信公众号文章`：公众号短链归档用例模板，等待补充真实文章输出。
+- `03_微信公众号文章`：公众号短链归档用例。
+- `04_论文PDF归档`：arXiv、Hugging Face PDF 和图表较多论文解析用例。
+- `05_微信视频号视频`：视频号 `sph` 公开分享页元数据、封面、字幕状态归档用例；另含用户提供媒体后的 OpenRouter ASR 冒烟测试。
 
 ```text
 ..\_reference/

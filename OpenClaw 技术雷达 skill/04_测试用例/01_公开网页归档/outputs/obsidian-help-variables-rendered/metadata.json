@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "source_type": "public_web_page",
+  "source_url": "https://help.obsidian.md/web-clipper/variables",
+  "final_url": "https://obsidian.md/help/web-clipper/variables",
+  "canonical_url": "https://obsidian.md/help/web-clipper/variables",
+  "title": "Variables - Obsidian Help",
+  "site": "Obsidian Help",
+  "author": "",
+  "published": "",
+  "description": "Variables - Obsidian Help",
+  "image": "",
+  "language": "en",
+  "captured_at": "2026-05-12T11:18:20+08:00",
+  "extraction_method": "dom-rendered",
+  "word_count": 1378,
+  "content_chars": 9318,
+  "content_sha256": "89a5e55a4f41749bb0bf0ccb709f226b14b596f4991b6e8d99f820373d83e7e5",
+  "download_images": false,
+  "asset_count": 0,
+  "warnings": [
+    "used rendered browser DOM content candidate",
+    "used rendered browser DOM"
+  ],
+  "canonical_source": "article.md",
+  "files": [
+    "metadata.json",
+    "article.md",
+    "assets/"
+  ],
+  "notes": [
+    "This archive is for public ordinary web pages.",
+    "It does not bypass login, paywalls, captcha, or access controls.",
+    "Images are downloaded only when --download-images is used."
+  ]
+}

@@ -10,7 +10,7 @@ published: "2026-04-30"
 description: "Best practices for optimizing prompt caching in Claude Code, including how to most effectively structure your prompt, use tools, and layer on compaction."
 image: "https://cdn.prod.website-files.com/68a44d4040f98a4adf2207b6/69f397e90d1e6ab0f5eada2b_og_lessons-from-building-claude-code-prompt-caching-is-everything.jpg"
 language: "en-US"
-captured_at: "2026-05-07T21:23:35+08:00"
+captured_at: "2026-05-12T11:17:45+08:00"
 extraction_method: "trafilatura"
 word_count: 1477
 content_chars: 8690

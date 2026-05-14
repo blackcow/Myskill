@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "source_type": "paper_pdf",
+  "input": "https://arxiv.org/abs/2602.07055",
+  "source_url": "https://arxiv.org/abs/2602.07055",
+  "pdf_url": "https://arxiv.org/pdf/2602.07055",
+  "download": {
+    "method": "download",
+    "status_code": 200,
+    "content_type": "application/pdf",
+    "bytes": 72366075,
+    "final_url": "https://arxiv.org/pdf/2602.07055",
+    "final_url_sanitized": false
+  },
+  "title": "Theory of Space: Can Foundation Models Construct Spatial Beliefs through Active Exploration?",
+  "authors": [
+    "Pingyue Zhang",
+    "Zihan Huang",
+    "Yue Wang",
+    "Jieyu Zhang",
+    "Letian Xue",
+    "Zihan Wang",
+    "Qineng Wang",
+    "Keshigeyan Chandrasegaran",
+    "Ruohan Zhang",
+    "Yejin Choi",
+    "Ranjay Krishna",
+    "Jiajun Wu",
+    "Li Fei-Fei",
+    "Manling Li"
+  ],
+  "arxiv_id": "2602.07055",
+  "version": null,
+  "published": "2026-02-04T19:06:40Z",
+  "arxiv_summary": "Spatial embodied intelligence requires agents to act to acquire information under partial observability. While multimodal foundation models excel at passive perception, their capacity for active, self-directed exploration remains understudied. We propose Theory of Space, defined as an agent's ability to actively acquire information through self-directed, active exploration and to construct, revise, and exploit a spatial belief from sequential, partial observations. We evaluate this through a benchmark where the goal is curiosity-driven exploration to build an accurate cognitive map. A key innovation is spatial belief probing, which prompts models to reveal their internal spatial representations at each step. Our evaluation of state-of-the-art models reveals several critical bottlenecks. First, we identify an Active-Passive Gap, where performance drops significantly when agents must autonomously gather information. Second, we find high inefficiency, as models explore unsystematically compared to program-based proxies. Through belief probing, we diagnose that while perception is an initial bottleneck, global beliefs suffer from instability that causes spatial knowledge to degrade over time. Finally, using a false belief paradigm, we uncover Belief Inertia, where agents fail to update obsolete priors with new evidence. This issue is present in text-based agents but is particularly severe in vision-based models. Our findings suggest that current foundation models struggle to maintain coherent, revisable spatial beliefs during active exploration.",
+  "captured_at": "2026-05-13T16:53:04+08:00",
+  "parser": "docling",
+  "parser_version": "2.93.0",
+  "page_count": 34,
+  "content_chars": 125215,
+  "content_sha256": "481fd9485bf1c4e7ff2637553e547d43298a4871089bf7fecaac50b5a4c457f6",
+  "source_pdf_sha256": "79bf433cd80d17b97f971eaffec019517c1b12bd1775268f4e1d887ef3abfc01",
+  "asset_count": 33,
+  "picture_count": 31,
+  "markdown_image_refs": 33,
+  "image_asset_mode": "referenced_assets",
+  "image_scale": 4.0,
+  "image_effective_dpi": 288,
+  "image_generation": {
+    "source": "docling_picture_items_and_pdf_crop_fallbacks",
+    "generate_page_images": false,
+    "generate_picture_images": true,
+    "generate_table_images": false,
+    "generate_figure_fallback_images": true
+  },
+  "figure_fallback_count": 13,
+  "figure_fallbacks": [
+    {
+      "page_no": 2,
+      "caption": "Figure 1: THEORY OF SPACE: active exploration, probed belief, and evaluation. Left: a top-down view of agent trajectory under partial observability in multiple-room scenes. Middle: the agent's action loop of moving, rotating, and observing in text- or vision-based environments, receiving egocentric observations and updating an internal belief. Right: evaluation through exploitation of the belief in spatial tasks and direct probing via probed cognitive maps.",
+      "asset": "assets/figure_fallback_page_0002_1_scale_4.png",
+      "crop_bbox": {
+        "l": 112.21620178222656,
+        "t": 712.4209213256836,
+        "r": 499.2097473144531,
+        "b": 537.3640441894531
+      },
+      "noise_text_count": 28,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000004_959345f1d7077511a43f8f9aa7806cd877f2ca2e9f4bb41ffd3e6e0e6f81cda7.png"
+      ]
+    },
+    {
+      "page_no": 3,
+      "caption": "Figure 2: Evaluation accuracy vs. exploration cost for active exploration in vision-world. Faded icons mark the passive setting, where the agent gets a pre-generated exploration history and only reasons.",
+      "asset": "assets/figure_fallback_page_0003_2_scale_4.png",
+      "crop_bbox": {
+        "l": 288.6694641113281,
+        "t": 642.4712219238281,
+        "r": 497.4864196777344,
+        "b": 486.93878173828125
+      },
+      "noise_text_count": 22,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000005_67fccda5b79c65828092da41606f39028696d035c117dc94624b47849a9a4291.png"
+      ]
+    },
+    {
+      "page_no": 6,
+      "caption": "Figure 3: THEORY OF SPACE exploitation task suite: it covers route -level egocentric reasoning and survey -level allocentric mapping. Route tasks evaluate path-based inference and egocentric observations. Survey tasks test global mapping, geometric transformation, and perspective conversion. Together they cover both local navigation reasoning and global spatial abstraction.",
+      "asset": "assets/figure_fallback_page_0006_3_scale_4.png",
+      "crop_bbox": {
+        "l": 123.44625854492188,
+        "t": 710.139030456543,
+        "r": 489.29986572265625,
+        "b": 438.50775146484375
+      },
+      "noise_text_count": 34,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000006_76b7fa1e7d8fe55244bfb3d1c44438db745d641e62051922c2b5e471f9a031f3.png"
+      ]
+    },
+    {
+      "page_no": 10,
+      "caption": "Figure 4: Accumulated information gain over exploration steps in the text world.",
+      "asset": "assets/figure_fallback_page_0010_4_scale_4.png",
+      "crop_bbox": {
+        "l": 326.8966369628906,
+        "t": 698.5308899999999,
+        "r": 505.3721618652344,
+        "b": 561.0158233642578
+      },
+      "noise_text_count": 27,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000008_2821840394c200fb3e01dbb97804cda35b1c90c00c4fbdc463de08b5853be307.png"
+      ]
+    },
+    {
+      "page_no": 11,
+      "caption": "Figure 5: Internal Spatial Belief Probing. At each step, the agent executes an action, receives an observation, and updates its spatial belief. We probe this belief by prompting the agent to (i) output a JSON-structured cognitive map of all observed objects and (ii) select the next unexplored position from a top-down view given a set of labeled candidate points. For clarity, the figure shows the probing process for a single step.",
+      "asset": "assets/figure_fallback_page_0011_5_scale_4.png",
+      "crop_bbox": {
+        "l": 124.65359497070312,
+        "t": 714.6555252075195,
+        "r": 486.9198303222656,
+        "b": 450.95123291015625
+      },
+      "noise_text_count": 23,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000009_d813d0c66f9df7e2643b189128f776b79a622127faf23288e81820af7a15f8ff.png"
+      ]
+    },
+    {
+      "page_no": 13,
+      "caption": "Figure 6: Accumulated Information Gain and Cognitive Map Correctness over steps.",
+      "asset": "assets/figure_fallback_page_0013_6_scale_4.png",
+      "crop_bbox": {
+        "l": 322.6789245605469,
+        "t": 297.48699951171875,
+        "r": 506.00152587890625,
+        "b": 179.0810546875
+      },
+      "noise_text_count": 26,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000010_632ce2dff6d47860b6f34108b960ca3a24fad06b64fa78794265b7b9a0e2b25a.png"
+      ]
+    },
+    {
+      "page_no": 23,
+      "caption": "Figure 10: Exploration prompts",
+      "asset": "assets/figure_fallback_page_0023_10_scale_4.png",
+      "crop_bbox": {
+        "l": 108.42204284667969,
+        "t": 419.8409118652344,
+        "r": 502.24285888671875,
+        "b": 249.53790283203125
+      },
+      "noise_text_count": 172,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000015_e8a2a1e0732892cdcb05ee11c624681e2895ce80c636029006dee4a0bf1d4d31.png"
+      ]
+    },
+    {
+      "page_no": 24,
+      "caption": "Figure 11: Evaluation prompt design. We show the prompt for each evaluation task.",
+      "asset": "assets/figure_fallback_page_0024_11_scale_4.png",
+      "crop_bbox": {
+        "l": 125.35195626503912,
+        "t": 625.6797532689766,
+        "r": 486.4672212177328,
+        "b": 169.88718797775664
+      },
+      "noise_text_count": 30,
+      "removed_markdown_lines": 1,
+      "removed_image_refs": []
+    },
+    {
+      "page_no": 25,
+      "caption": "Figure 12: Belief probing prompt design. We use these prompts to ask the model to output a cognitive map or select unobserved points.",
+      "asset": "assets/figure_fallback_page_0025_12_scale_4.png",
+      "crop_bbox": {
+        "l": 111.66300964355469,
+        "t": 662.3006286621094,
+        "r": 500.0252380371094,
+        "b": 442.0848083496094
+      },
+      "noise_text_count": 80,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000016_456118ace427581cef9a7c4c0f8c051bb1467ed72ea766d0315333a8379fb28d.png"
+      ]
+    },
+    {
+      "page_no": 25,
+      "caption": "Figure 13: The symbol map and the image map provide parallel representations of the same environment for text and vision settings in uncertainty probing prompts.",
+      "asset": "assets/figure_fallback_page_0025_13_scale_4.png",
+      "crop_bbox": {
+        "l": 120.60562133789062,
+        "t": 294.5329895019531,
+        "r": 490.15338134765625,
+        "b": 146.64019775390625
+      },
+      "noise_text_count": 25,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000016_456118ace427581cef9a7c4c0f8c051bb1467ed72ea766d0315333a8379fb28d.png",
+        "image_000017_4215f908b24582d19520f37bb0c4a7a2c1d4350efbe154087efb3b65fd798f58.png"
+      ]
+    },
+    {
+      "page_no": 28,
+      "caption": "Figure 14: Examples of task formats and answer styles used. Each block illustrates a spatial reasoning task type in our suite (Route-level and Survey-level), including the corresponding input context and an example open-ended answer that must follow a strict output format. In the vision setting, textual scene descriptions in the questions are replaced by rendered observation images.",
+      "asset": "assets/figure_fallback_page_0028_14_scale_4.png",
+      "crop_bbox": {
+        "l": 150.55513816697038,
+        "t": 578.3623629278,
+        "r": 398.43622959213525,
+        "b": 194.58130317078349
+      },
+      "noise_text_count": 26,
+      "removed_markdown_lines": 2,
+      "removed_image_refs": []
+    },
+    {
+      "page_no": 29,
+      "caption": "Figure 15: GPT-5.2's turn-by-turn cognitive map in text world during exploration.",
+      "asset": "assets/figure_fallback_page_0029_15_scale_4.png",
+      "crop_bbox": {
+        "l": 105.26189422607422,
+        "t": 694.3019180297852,
+        "r": 506.6693115234375,
+        "b": 553.2845916748047
+      },
+      "noise_text_count": 28,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000019_cbd6e21dd8fc18fee79ea0dc57921aa7c65a3bf1cabc79985889d6c14b614dcb.png"
+      ]
+    },
+    {
+      "page_no": 29,
+      "caption": "Figure 16: GPT-5.2's turn-by-turn cognitive map in vision world during exploration.",
+      "asset": "assets/figure_fallback_page_0029_16_scale_4.png",
+      "crop_bbox": {
+        "l": 104.94512176513672,
+        "t": 492.05267333984375,
+        "r": 507.02337646484375,
+        "b": 389.32989501953125
+      },
+      "noise_text_count": 24,
+      "removed_markdown_lines": 0,
+      "removed_image_refs": [
+        "image_000020_e54696f616e284f9bcbf29b8d888231b3812a8a06665052693efe248a0faeffc.png"
+      ]
+    }
+  ],
+  "pruned_unreferenced_assets": 11,
+  "ocr_mode": "disabled_by_default",
+  "warnings": [
+    "docling_ocr_disabled_for_born_digital_pdf",
+    "docling_picture_description_disabled_use_multimodal_followup",
+    "docling_formula_enrichment_disabled_math_may_be_plain_text",
+    "docling_chart_extraction_disabled_chart_data_may_be_caption_only",
+    "figure_text_soup_fallback_page_2:figure_fallback_page_0002_1_scale_4.png",
+    "figure_text_soup_fallback_page_3:figure_fallback_page_0003_2_scale_4.png",
+    "figure_text_soup_fallback_page_6:figure_fallback_page_0006_3_scale_4.png",
+    "figure_text_soup_fallback_page_10:figure_fallback_page_0010_4_scale_4.png",
+    "figure_text_soup_fallback_page_11:figure_fallback_page_0011_5_scale_4.png",
+    "figure_text_soup_fallback_page_13:figure_fallback_page_0013_6_scale_4.png",
+    "figure_text_soup_fallback_page_23:figure_fallback_page_0023_10_scale_4.png",
+    "figure_text_soup_fallback_page_24:figure_fallback_page_0024_11_scale_4.png",
+    "figure_text_soup_fallback_page_25:figure_fallback_page_0025_12_scale_4.png",
+    "figure_text_soup_fallback_page_25:figure_fallback_page_0025_13_scale_4.png",
+    "figure_text_soup_fallback_page_28:figure_fallback_page_0028_14_scale_4.png",
+    "figure_text_soup_fallback_page_29:figure_fallback_page_0029_15_scale_4.png",
+    "figure_text_soup_fallback_page_29:figure_fallback_page_0029_16_scale_4.png"
+  ],
+  "canonical_source": "paper.md",
+  "files": [
+    "metadata.json",
+    "paper.md",
+    "paper.json",
+    "source.pdf",
+    "assets/"
+  ],
+  "notes": [
+    "paper.md is the main reading source for downstream agents.",
+    "paper.json preserves Docling structured output for evidence lookup.",
+    "source.pdf is retained as the original evidence file."
+  ]
+}

@@ -7,8 +7,8 @@
 每篇文章的归档目录只允许包含：
 
 ```text
-README.md
-article.structured.local.md
+metadata.json
+article.md
 assets/
 ```
 
@@ -16,9 +16,11 @@ assets/
 
 默认读取顺序：
 
-1. `README.md`：只看来源、标题、发布时间、抓取方式、资源统计、注意事项。
-2. `article.structured.local.md`：唯一正文主源，用于摘要、问答、技术雷达打分、技术卡片生成、认知资产沉淀。
+1. `article.md`：唯一正文主源，用于摘要、问答、技术雷达打分、技术卡片生成、认知资产沉淀。
+2. `metadata.json`：完整抓取元数据和调试信息，用于查看 `biz`、`mid`、`idx`、`sn`、抓取方式、正文来源、图片/视频/资源统计、内容哈希和目录契约。
 3. `assets/`：只有需要看图片、图示、视频封面时才读取。
+
+正文文件统一在文件开头保留必要 YAML frontmatter。微信公众号文章的必要字段包括来源 URL、标题、发布时间、公众号账号、抓取时间、抓取方式、正文来源、图片/视频/资源数量、内容哈希和 `status`；更完整的抓取细节放入 `metadata.json`。
 
 不要让后续 agent 读取或依赖：
 
@@ -42,8 +44,9 @@ assets/
 -> 清理公众号 profile / 脚本 / 非正文组件 / 运营尾巴
 -> 下载正文图片到 assets/
 -> 将微信视频 iframe 替换为 视频封面 + 原视频链接
--> 生成 article.structured.local.md
--> 生成 README.md
+-> 在正文文件开头写入必要 frontmatter
+-> 生成 article.md
+-> 生成 metadata.json
 ```
 
 关键结论：
@@ -75,8 +78,8 @@ Set-Location "D:\project\Myskill\OpenClaw 技术雷达 skill\02_采集与归档�
 脚本会在 `OutRoot` 下创建一个文章目录，目录内只生成：
 
 ```text
-README.md
-article.structured.local.md
+metadata.json
+article.md
 assets/
 ```
 
@@ -103,9 +106,10 @@ yyyy-MM-dd-文章标题
 
 一篇文章归档完成后，检查：
 
-- 目录内只有 `README.md`、`article.structured.local.md`、`assets/`。
-- `README.md` 记录原文链接、标题、发布时间、抓取方式。
-- `article.structured.local.md` 中图片按阅读顺序出现。
+- 目录内只有 `metadata.json`、`article.md`、`assets/`。
+- `article.md` 以 YAML frontmatter 开头，正文紧随其后。
+- `metadata.json` 记录原文链接、标题、发布时间、抓取方式、正文来源、图片/视频/资源数量、内容哈希和文件清单。
+- `article.md` 中图片按阅读顺序出现。
 - Markdown 中不应出现 `https://mmbiz.qpic.cn` 远程图片链接。
 - Markdown 中不应出现 `<iframe>`。
 - `assets/` 中不应保留正文未引用的资源文件。

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "source_type": "public_web_page",
+  "source_url": "https://claude.com/blog/building-ai-agents-for-the-enterprise",
+  "final_url": "https://claude.com/blog/building-ai-agents-for-the-enterprise",
+  "canonical_url": "https://claude.com/blog/building-ai-agents-for-the-enterprise",
+  "title": "Building AI agents for the enterprise | Claude",
+  "site": "Claude",
+  "author": "",
+  "published": "Apr 30, 2026",
+  "description": "In this guide, we share how leading organizations are using agents to transform their work today, and how Claude Cowork brings these capabilities to every team.",
+  "image": "https://cdn.prod.website-files.com/68a44d4040f98a4adf2207b6/69f3cf6a2e9d9a8377b089fc_og_building-ai-agents-for-the-enterprise.jpg",
+  "language": "en-US",
+  "captured_at": "2026-05-12T11:20:14+08:00",
+  "extraction_method": "dom-expanded",
+  "word_count": 401,
+  "content_chars": 2648,
+  "content_sha256": "75e20d60cbc7d45d2b98f6f72f7de084ddc04aa636520ca69360e5ce92e75726",
+  "download_images": true,
+  "asset_count": 1,
+  "warnings": [
+    "trafilatura result looked partial (393 words); used larger DOM candidate (2730 words)"
+  ],
+  "canonical_source": "article.md",
+  "files": [
+    "metadata.json",
+    "article.md",
+    "assets/"
+  ],
+  "notes": [
+    "This archive is for public ordinary web pages.",
+    "It does not bypass login, paywalls, captcha, or access controls.",
+    "Images are downloaded only when --download-images is used."
+  ]
+}
